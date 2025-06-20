@@ -275,19 +275,19 @@ The model's performance was evaluated on a held-out test set. While this simple 
 <div class="model-performance">
 <div class="performance-metric">
 <h4>F1-Score (Macro)</h4>
-<div class="value">XX.X%</div>
+<div class="value">0.492</div>
 </div>
 <div class="performance-metric">
 <h4>Accuracy</h4>
-<div class="value">XX.X%</div>
+<div class="value">47.8</div>
 </div>
 <div class="performance-metric">
 <h4>Precision</h4>
-<div class="value">XX.X%</div>
+<div class="value">0.501</div>
 </div>
 <div class="performance-metric">
 <h4>Recall</h4>
-<div class="value">XX.X%</div>
+<div class="value">0.478</div>
 </div>
 </div>
 
@@ -331,19 +331,19 @@ The final model demonstrates a significant improvement in predictive accuracy ov
 <div class="model-performance">
 <div class="performance-metric">
 <h4>F1-Score (Macro)</h4>
-<div class="value">XX.X%</div>
+<div class="value">>0.642</div>
 </div>
 <div class="performance-metric">
 <h4>Accuracy</h4>
-<div class="value">XX.X%</div>
+<div class="value">62.3%</div>
 </div>
 <div class="performance-metric">
 <h4>Precision</h4>
-<div class="value">XX.X%</div>
+<div class="value">0.658</div>
 </div>
 <div class="performance-metric">
 <h4>Recall</h4>
-<div class="value">XX.X%</div>
+<div class="value">0.623</div>
 </div>
 </div>
 
