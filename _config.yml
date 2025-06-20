@@ -24,6 +24,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
+theme: jekyll-theme-yat
+remote_theme: jeffreytse/jekyll-theme-yat
+
 title: "EECS 398 Final Project"
 email: xiulin@umich.edu
 author: xiulin Chen
@@ -217,3 +220,4 @@ plugins:
   - jekyll-sitemap
   - jekyll-paginate
   - jekyll-spaceship
+  - jekyll-remote-theme
