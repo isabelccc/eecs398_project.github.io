@@ -29,6 +29,24 @@ subheading: "A comprehensive analysis using machine learning to predict and unde
 <h3>Dataset Overview</h3>
 <p>Our analysis focuses on power outage data collected across the United States, examining various factors that contribute to outage occurrences including weather conditions, geographic location, infrastructure age, and historical patterns.</p>
 
+<p>
+  Our project leverages a comprehensive dataset detailing major power outage events across the United States, spanning from the year 2000 to 2016.
+  Each row in the dataset represents a single outage incident, enriched with contextual features such as climate conditions, regional infrastructure metrics, population data, and outage metadata.
+  The dataset originates from U.S. government and energy infrastructure reports.
+</p>
+
+<p><strong>Total Rows:</strong> ~1535</p>
+
+<h4>Key Columns for Analysis:</h4>
+<ul>
+  <li><strong>YEAR, MONTH:</strong> When the outage happened</li>
+  <li><strong>U.S._STATE, CLIMATE.REGION:</strong> Where it occurred</li>
+  <li><strong>CLIMATE.CATEGORY, ANOMALY.LEVEL:</strong> Climate conditions</li>
+  <li><strong>CUSTOMERS.AFFECTED:</strong> Impact</li>
+  <li><strong>OUTAGE.START, OUTAGE.RESTORATION:</strong> Timing</li>
+  <li><strong>CAUSE.CATEGORY:</strong> What caused the outage</li>
+</ul>
+
 <h4>Key Questions We Investigate:</h4>
 <ul>
   <li>What are the primary factors that contribute to power outages?</li>
@@ -41,144 +59,120 @@ subheading: "A comprehensive analysis using machine learning to predict and unde
 <p>Power outages can have significant economic and social impacts, affecting everything from healthcare facilities to transportation systems. Understanding and predicting these events can help utility companies improve infrastructure resilience and emergency response planning.</p>
 
 </div>
+<div class="project-section">
+  <h2>2. Data Cleaning and Exploratory Data Analysis</h2>
+
+  <p>
+    A crucial first step in any data science project is understanding the data. We performed a thorough exploratory data analysis (EDA) to uncover patterns, identify anomalies, and generate hypotheses about the causes of power outages.
+  </p>
+
+  <h3>Data Cleaning Process</h3>
+  <p>We performed several critical data cleaning operations to ensure the dataset was analysis-ready and aligned with the true underlying data generating process. Each step addressed structural issues, semantic inconsistencies, or outliers present in the raw data, improving both data quality and model performance.</p>
+
+<ul>
+  <li>
+    <strong>Date-Time Reconstruction:</strong>  
+    The raw dataset recorded outage start and restoration information in two separate columns: a date (e.g., <code>OUTAGE.START.DATE</code>) and a time (e.g., <code>OUTAGE.START.TIME</code>). These were originally stored as strings or datetime objects in inconsistent formats. We combined the date and time fields into unified datetime columns (<code>OUTAGE.START</code> and <code>OUTAGE.RESTORATION</code>) using <code>pd.to_datetime</code> with error coercion. This allowed us to calculate meaningful features like outage duration.
+  </li>
+    <li>
+    <strong>Duration Calculation:</strong>  
+    From the parsed datetime fields, we computed <code>DURATION_HOURS</code>, representing the total length of an outage in hours. This transformation is crucial as outage length is a strong indicator of outage severity and infrastructure resilience.
+  </li>
+    <li>
+    <strong>Invalid Value Removal:</strong>  
+    Rows with invalid or missing datetime values (due to parsing failures or malformed entries) were dropped using <code>dropna()</code> to avoid introducing noise in time-based analyses. We also ensured that numeric columns such as <code>CUSTOMERS.AFFECTED</code> and <code>ANOMALY.LEVEL</code> were properly coerced into numeric types using <code>pd.to_numeric(errors='coerce')</code>, converting malformed or corrupted values to NaN.
+  </li>
+    <li>
+    <strong>Outlier Filtering:</strong>  
+    We examined the distribution of outage durations and number of customers affected. Values above the 99th percentile for <code>DURATION_HOURS</code> (approximately 389 hours) were removed, as these were likely data-entry errors or events not representative of typical outage behavior. Similarly, any event affecting more than 10 million customers was excluded. These steps helped prevent skewed model learning and provided a more realistic representation of outage conditions.
+  </li>
+    <li>
+    <strong>Data Type Conversions and Cleanup:</strong>  
+    We cast relevant fields to appropriate types for model compatibility (e.g., integer for <code>YEAR</code>, float for <code>ANOMALY.LEVEL</code>, datetime for timestamps). This ensured pipeline compatibility for one-hot encoding, scaling, and modeling downstream.
+  </li>
+
+
+
+
+
+  <h4>Sample of the Dataset:</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>OBS</th>
+        <th>YEAR</th>
+        <th>MONTH</th>
+        <th>U.S._STATE</th>
+        <th>CLIMATE.REGION</th>
+        <th>ANOMALY.LEVEL</th>
+        <th>CLIMATE.CATEGORY</th>
+        <th>CUSTOMERS.AFFECTED</th>
+        <th>OUTAGE.START</th>
+        <th>OUTAGE.RESTORATION</th>
+        <th>DURATION_HOURS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>2011</td><td>7</td><td>Minnesota</td><td>East North Central</td><td>-0.3</td><td>normal</td><td>70000</td><td>2011-07-01 17:00</td><td>2011-07-03 20:00</td><td>51.0</td></tr>
+      <tr><td>2</td><td>2014</td><td>5</td><td>Minnesota</td><td>East North Central</td><td>-0.1</td><td>normal</td><td>70000</td><td>2014-05-11 18:38</td><td>2014-05-11 18:39</td><td>0.02</td></tr>
+      <tr><td>3</td><td>2010</td><td>10</td><td>Minnesota</td><td>East North Central</td><td>-1.5</td><td>cold</td><td>68200</td><td>2010-10-26 20:00</td><td>2010-10-28 22:00</td><td>50.0</td></tr>
+      <tr><td>4</td><td>2012</td><td>6</td><td>Minnesota</td><td>East North Central</td><td>-0.1</td><td>normal</td><td>60000</td><td>2012-06-19 04:30</td><td>2012-06-20 23:00</td><td>42.5</td></tr>
+      <tr><td>5</td><td>2015</td><td>7</td><td>Minnesota</td><td>East North Central</td><td>1.2</td><td>warm</td><td>250000</td><td>2015-07-18 02:00</td><td>2015-07-19 07:00</td><td>29.0</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Key Findings from EDA</h3>
+  <ul>
+    <li><strong>Geographic Concentration</strong>: Outages are not randomly distributed but are concentrated in specific regions, likely due to a combination of weather, population, and infrastructure factors.</li>
+    <li><strong>Seasonal Peaks</strong>: Outage incidents peak during winter and summer, coinciding with seasons of extreme weather like major storms and heatwaves.</li>
+    <li><strong>Strong Weather Correlation</strong>: There is a clear and strong link between severe weather events and the likelihood of a power outage.</li>
+    <li><strong>Infrastructure's Role</strong>: Preliminary analysis suggests that regions with older power grid infrastructure are more vulnerable to disruptions.</li>
+  </ul>
+
+  <h2>Interactive Data Visualizations</h2>
+  <p>This section provides interactive visualizations of the power outage data, allowing for a deeper exploration of the patterns and trends discussed in the analysis.</p>
+  <h3>Univariate Analysis : Outage Duration (Box Plot)</h3>
+  <iframe src="{{ site.baseurl }}/univariate_duration_box.html" width="100%" height="500px" frameborder="0"></iframe>
+  <p><strong>Analysis:</strong>
+  This box plot illustrates the distribution of outage durations in hours. The median outage duration is approximately 21 hours, with most outages lasting under 60 hours. However, there are several extreme events exceeding 140 hours, which are visualized as outliers. These long outages may be due to severe weather or infrastructure failures and are rare but impactful. This insight supports our focus on duration as a key indicator of severity.</p>
+<h3>Univariate Analysis: Customers Affected (Histogram)</h3>
+<iframe src="{{ site.baseurl }}/univariate_customers.html" width="100%" height="500px" frameborder="0"></iframe>
+<p><strong>Analysis:</strong>
+This histogram displays the distribution of the number of customers affected by each outage. The distribution is highly right-skewed — most outages affect fewer than 250,000 customers, while a few extreme cases impact over 1 million. These rare but massive events are important for understanding system vulnerability and planning mitigation efforts. The presence of such a long tail highlights the need for careful handling of this variable during model training, potentially via transformation or robust scaling.</p>
+  
+  <h3>Bivariate Analysis: Weather's Impact on Outages</h3>
+  
+  <iframe src="{{ site.baseurl }}/outages_map.html" width="100%" height="500px" frameborder="0"></iframe>
+
+  <p><strong>Analysis:</strong> 
+This interactive map visualizes the geographic distribution and severity of power outages across the United States, with color-coded markers reflecting weather-related conditions. Larger red circles indicate higher outage severity and frequency, often due to extreme weather.
+
+The coastal regions—particularly the Southeast (e.g., Florida, North Carolina), Gulf Coast (e.g., Texas, Louisiana), and the West Coast (e.g., California)—show a higher concentration of severe outages. These areas are more prone to hurricanes, wildfires, and heavy storms, aligning with known climate vulnerabilities. In contrast, many inland regions experience fewer or less severe outages, indicated by smaller green and orange markers. This spatial pattern highlights the importance of incorporating regional climate risk into outage prediction models and utility infrastructure planning.
+</p>
+</div>
+
 
 <div class="project-section">
 
-## 2. Data Cleaning and Exploratory Data Analysis
+  <h2>Further Visual Analysis</h2>
 
-A crucial first step in any data science project is understanding the data. We performed a thorough exploratory data analysis (EDA) to uncover patterns, identify anomalies, and generate hypotheses about the causes of power outages.
+  <p>To deepen our understanding, we created additional visualizations focusing on different dimensions of the outage data.</p>
 
-### Data Cleaning Process
-Our raw data required several cleaning and preprocessing steps to prepare it for analysis:
-- **Missing Value Imputation**: Strategically handled missing data points to preserve data integrity.
-- **Data Type Conversion**: Ensured all variables were in the correct format (e.g., converting date strings to datetime objects).
-- **Feature Engineering**: Created new, more predictive features from the existing data, such as extracting the month and year from timestamps, calculate the duration.
-- **Outlier Detection**: Identified and assessed outliers to prevent them from skewing our analysis and model training.
+  <h3>Temporal Trends: Outages Over Time</h3>
+  <p>This line chart helps us identify seasonality and long-term trends in power outage occurrences.</p>
 
-<h4>Sample of the Dataset:</h4>
-<table>
-  <thead>
-    <tr>
-      <th>OBS</th>
-      <th>YEAR</th>
-      <th>MONTH</th>
-      <th>U.S._STATE</th>
-      <th>CLIMATE.REGION</th>
-      <th>ANOMALY.LEVEL</th>
-      <th>CLIMATE.CATEGORY</th>
-      <th>CUSTOMERS.AFFECTED</th>
-      <th>OUTAGE.START</th>
-      <th>OUTAGE.RESTORATION</th>
-      <th>DURATION_HOURS</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>2011</td>
-      <td>7</td>
-      <td>Minnesota</td>
-      <td>East North Central</td>
-      <td>-0.3</td>
-      <td>normal</td>
-      <td>70000</td>
-      <td>2011-07-01 17:00</td>
-      <td>2011-07-03 20:00</td>
-      <td>51.0</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>2014</td>
-      <td>5</td>
-      <td>Minnesota</td>
-      <td>East North Central</td>
-      <td>-0.1</td>
-      <td>normal</td>
-      <td>70000</td>
-      <td>2014-05-11 18:38</td>
-      <td>2014-05-11 18:39</td>
-      <td>0.02</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>2010</td>
-      <td>10</td>
-      <td>Minnesota</td>
-      <td>East North Central</td>
-      <td>-1.5</td>
-      <td>cold</td>
-      <td>68200</td>
-      <td>2010-10-26 20:00</td>
-      <td>2010-10-28 22:00</td>
-      <td>50.0</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>2012</td>
-      <td>6</td>
-      <td>Minnesota</td>
-      <td>East North Central</td>
-      <td>-0.1</td>
-      <td>normal</td>
-      <td>60000</td>
-      <td>2012-06-19 04:30</td>
-      <td>2012-06-20 23:00</td>
-      <td>42.5</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>2015</td>
-      <td>7</td>
-      <td>Minnesota</td>
-      <td>East North Central</td>
-      <td>1.2</td>
-      <td>warm</td>
-      <td>250000</td>
-      <td>2015-07-18 02:00</td>
-      <td>2015-07-19 07:00</td>
-      <td>29.0</td>
-    </tr>
-  </tbody>
-</table>
+  <iframe src="{{ site.baseurl }}/outages_over_time.html" width="100%" height="500px" frameborder="0"></iframe>
 
-### Key Findings from EDA
-Our exploratory analysis revealed several critical insights:
-- **Geographic Concentration**: Outages are not randomly distributed but are concentrated in specific regions, likely due to a combination of weather, population, and infrastructure factors.
-- **Seasonal Peaks**: Outage incidents peak during winter and summer, coinciding with seasons of extreme weather like major storms and heatwaves.
-- **Strong Weather Correlation**: There is a clear and strong link between severe weather events and the likelihood of a power outage.
-- **Infrastructure's Role**: Preliminary analysis suggests that regions with older power grid infrastructure are more vulnerable to disruptions.
+  <p><strong>Analysis:</strong> This visualization tracks the number of power outages month by month. Clear seasonal peaks can be observed, particularly during the summer and winter months, which typically correspond to periods of extreme weather. This confirms the seasonal patterns suggested in our initial EDA and highlights the predictive power of time-based features.</p>
 
-## Interactive Data Visualizations
+  <h3>Severity Analysis: Outage Duration by Cause</h3>
+  <p>Understanding which types of incidents lead to the longest outages is crucial for resource planning.</p>
 
-This section provides interactive visualizations of the power outage data, allowing for a deeper exploration of the patterns and trends discussed in the analysis.
+  <iframe src="{{ site.baseurl }}/duration_by_cause.html" width="100%" height="500px" frameborder="0"></iframe>
 
+  <p><strong>Analysis:</strong> This bar chart compares the average outage duration for different causes. It reveals that events like severe weather lead to significantly longer restoration times compared to equipment failure. This insight can help utility companies prioritize and allocate resources more effectively during different types of crises.</p>
 
-
-### Bivariate Analysis: Weather's Impact on Outages
-Next, we investigated the relationship between environmental factors and power outages. This analysis addresses the question: *How do weather events correlate with power disruptions?*
-
-<iframe src="{{ site.baseurl }}/outages_map.html" width="100%" height="500px" frameborder="0"></iframe>
-
-**Analysis:** This map visualizes the correlation between severe weather events (e.g., storms, high winds) and the location of power outages. The data shows a strong positive correlation: areas experiencing extreme weather conditions are significantly more likely to suffer from power disruptions. This finding underscores the importance of weather data as a key predictive feature in our models.
-
-## Further Visual Analysis
-
-To deepen our understanding, we created additional visualizations focusing on different dimensions of the outage data.
-
-### Temporal Trends: Outages Over Time
-This line chart helps us identify seasonality and long-term trends in power outage occurrences.
-
-<iframe src="{{ site.baseurl }}/outages_over_time.html" width="100%" height="500px" frameborder="0"></iframe>
-
-**Analysis:** This visualization tracks the number of power outages month by month. Clear seasonal peaks can be observed, particularly during the summer and winter months, which typically correspond to periods of extreme weather. This confirms the seasonal patterns suggested in our initial EDA and highlights the predictive power of time-based features.
-
-### Severity Analysis: Outage Duration by Cause
-Understanding which types of incidents lead to the longest outages is crucial for resource planning.
-
-<iframe src="{{ site.baseurl }}/duration_by_cause.html" width="100%" height="500px" frameborder="0"></iframe>
-
-**Analysis:** This bar chart compares the average outage duration for different causes. It reveals that events like severe weather lead to significantly longer restoration times compared to equipment failure. This insight can help utility companies prioritize and allocate resources more effectively during different types of crises.
-
+</div>
 
 
 ### Regional Analysis: Outages by Climate Zone
@@ -191,258 +185,256 @@ This treemap provides a proportional view of outage distribution across differen
 </div>
 
 <div class="project-section">
+<div class="project-section">
 
-## 3. Framing a Prediction Problem
+  <h3>Regional Analysis: Outages by Climate Zone</h3>
+  <p>This treemap provides a proportional view of outage distribution across different climate regions.</p>
 
-### Prediction Problem Statement
-We aim to predict the **cause of a major power outage**. In this project, we aim to predict the cause of a major power outage in the United States using relevant environmental, regional, and temporal data available at the time of the outage. The goal is to assist utility companies and policy-makers in proactively identifying risk factors and preparing mitigation strategies.
+  <iframe src="{{ site.baseurl }}/outages_by_region.html" width="100%" height="500px" frameborder="0"></iframe>
 
-**Problem Type**: Multiclass classification  
-**Response Variable**: `CAUSE.CATEGORY` — this column represents the high-level cause of the power outage (e.g., intentional attack, equipment failure, public appeal, etc.). We chose this variable because understanding the cause of an outage has practical value for prevention and planning.
-**Evaluation Metric**: Macro-averaged F1-score. This metric is more appropriate than accuracy because our dataset is imbalanced, with some cause categories appearing much less frequently than others. Macro F1 equally weights each class, ensuring that rare but important categories are not ignored.
-
-### Model Approach
-We're building a **predictive model** (not inferential) because our goal is to forecast future outages based on information available before the event occurs. This means we only use features that would be known at prediction time, such as:
-- Weather forecasts
-- Historical outage patterns
-- Geographic and infrastructure characteristics
-- Seasonal and temporal features
-
-### Variables Used in the Model
-
-Our analysis utilizes a comprehensive set of variables from the power outage dataset. Below is a detailed breakdown of all variables considered in our model:
-
-| Variable Name | Description | Data Type | Role in Model | Source |
-|---------------|-------------|-----------|---------------|---------|
-| **Response Variable** |
-| `CAUSE.CATEGORY` | High-level cause of power outage (e.g., severe weather, equipment failure) | Categorical | Target Variable | DOE Database |
-| **Temporal Features** |
-| `YEAR` | Year of the outage event | Integer | Predictor | DOE Database |
-| `MONTH` | Month of the outage event (1-12) | Integer | Predictor | DOE Database |
-| `OUTAGE.START` | Start date and time of outage | DateTime | Predictor | DOE Database |
-| `OUTAGE.RESTORATION` | Restoration date and time | DateTime | Predictor | DOE Database |
-| `DURATION_HOURS` | Duration of outage in hours | Float | Predictor | Calculated |
-| **Geographic Features** |
-| `U.S._STATE` | State where outage occurred | Categorical | Predictor | DOE Database |
-| `CLIMATE.REGION` | Climate region classification | Categorical | Predictor | DOE Database |
-| `LAT` | Latitude coordinate of state center | Float | Predictor | Calculated |
-| `LON` | Longitude coordinate of state center | Float | Predictor | Calculated |
-| **Weather & Climate Features** |
-| `ANOMALY.LEVEL` | Temperature anomaly level | Float | Predictor | Climate Data |
-| `CLIMATE.CATEGORY` | Climate category (normal, warm, cold) | Categorical | Predictor | Climate Data |
-| **Impact & Severity Features** |
-| `CUSTOMERS.AFFECTED` | Number of customers affected by outage | Integer | Predictor | DOE Database |
-| **Demographic & Land Use Features** |
-| `POPDEN_URBAN` | Urban population density | Float | Predictor | Census Data |
-| `POPDEN_RURAL` | Rural population density | Float | Predictor | Census Data |
-| `AREAPCT_URBAN` | Percentage of urban area | Float | Predictor | Census Data |
-| `AREAPCT_UC` | Percentage of urban cluster area | Float | Predictor | Census Data |
-| `PCT_LAND` | Percentage of land area | Float | Predictor | Census Data |
-| `PCT_WATER_TOT` | Total percentage of water area | Float | Predictor | Census Data |
-| `PCT_WATER_INLAND` | Percentage of inland water area | Float | Predictor | Census Data |
-
-#### Variable Categories and Their Importance:
-
-**Primary Predictors:**
-- **Weather Variables**: `ANOMALY.LEVEL`, `CLIMATE.CATEGORY` - These are crucial as weather is a major cause of outages
-- **Geographic Variables**: `U.S._STATE`, `CLIMATE.REGION` - Capture regional vulnerability patterns
-- **Temporal Variables**: `YEAR`, `MONTH` - Capture seasonal and long-term trends
-
-**Secondary Predictors:**
-- **Demographic Variables**: Population density and land use characteristics that may indicate infrastructure stress
-- **Impact Variables**: `CUSTOMERS.AFFECTED` - May indicate system vulnerability patterns
-
-**Feature Engineering:**
-- **`DURATION_HOURS`**: Calculated from start and restoration times to capture outage severity
-- **`LAT`/`LON`**: Geographic coordinates for spatial analysis and mapping
-- **Seasonal Features**: Derived from `MONTH` to capture seasonal patterns
-
-#### Data Quality Considerations:
-- All variables underwent data cleaning and validation
-- Missing values were handled appropriately for each variable type
-- Categorical variables were encoded using one-hot encoding
-- Numerical variables were scaled for model training
+  <p><strong>Analysis:</strong> This visualization breaks down the total number of outages by climate region. It offers a different perspective from the state-level map, highlighting that certain climate zones—especially the Southeast and Northeast—are inherently more susceptible to power disruptions. This reinforces the idea that regional climate characteristics are a strong predictive signal.</p>
 
 </div>
 
 <div class="project-section">
 
-## 4. Baseline Model
+  <h2>3. Framing a Prediction Problem</h2>
 
-### Model Description
-To establish a performance benchmark, our baseline model utilizes a **Logistic Regression** classifier. This model was chosen for its simplicity and interpretability, providing a clear starting point for evaluating more complex models.
-
-The baseline model is trained on a foundational set of features:
-- **Quantitative Features**: Temperature, precipitation, wind speed
-- **Categorical Features**: State, season (encoded using One-Hot Encoding)
-- **Ordinal Features**: Infrastructure age category
-
-### Feature Engineering
-All preprocessing steps are encapsulated in a single `sklearn` Pipeline to ensure consistency and prevent data leakage. This includes:
-- **Categorical Encoding**: One-Hot encoding for state and season variables.
-- **Feature Scaling**: `StandardScaler` applied to numerical features.
-
-### Baseline Performance
-The model's performance was evaluated on a held-out test set. While this simple model provides a foundation, its predictive power is limited.
-
-<div class="model-performance">
-<div class="performance-metric">
-<h4>F1-Score (Macro)</h4>
-<div class="value">0.492</div>
-</div>
-<div class="performance-metric">
-<h4>Accuracy</h4>
-<div class="value">47.8</div>
-</div>
-<div class="performance-metric">
-<h4>Precision</h4>
-<div class="value">0.501</div>
-</div>
-<div class="performance-metric">
-<h4>Recall</h4>
-<div class="value">0.478</div>
-</div>
-</div>
-
-**Assessment**: The baseline model serves as a crucial reference point. The results indicate that while a simple linear model can capture some of the relationships, more sophisticated feature engineering and a more powerful algorithm are necessary to significantly improve performance.
-
-</div>
-
-<div class="project-section">
-
-## 5. Final Model
-
-### Model Enhancement
-Our final model improves upon the baseline by incorporating more advanced features and a more powerful algorithm, a **Random Forest** classifier. This model was chosen for its ability to capture non-linear relationships and interactions between features.
-
-### Enhanced Features
-We engineered several new features to provide the model with more predictive signals:
-<div class="feature-list">
-<div class="feature-item">
-<h4>Weather Severity Index</h4>
-A composite score combining multiple weather variables to represent overall weather extremity.
-</div>
-<div class="feature-item">
-<h4>Historical Outage Frequency</h4>
-A rolling average of past outages in the region to capture recurring vulnerabilities.
-</div>
-<div class="feature-item">
-<h4>Seasonal Interaction Terms</h4>
-Interaction features between weather conditions and seasonal patterns to model conditional risks.
-</div>
-<div class="feature-item">
-<h4>Geographic Risk Score</h4>
-A score based on region-specific infrastructure and historical data to quantify inherent risk.
-</div>
-</div>
-
-### Model Selection and Hyperparameter Tuning
-We evaluated multiple algorithms, with Random Forest yielding the best performance. Hyperparameters were tuned using `GridSearchCV` with 5-fold cross-validation to find the optimal model configuration.
-
-### Final Model Performance
-The final model demonstrates a significant improvement in predictive accuracy over the baseline.
-<div class="model-performance">
-<div class="performance-metric">
-<h4>F1-Score (Macro)</h4>
-<div class="value">>0.642</div>
-</div>
-<div class="performance-metric">
-<h4>Accuracy</h4>
-<div class="value">62.3%</div>
-</div>
-<div class="performance-metric">
-<h4>Precision</h4>
-<div class="value">0.658</div>
-</div>
-<div class="performance-metric">
-<h4>Recall</h4>
-<div class="value">0.623</div>
-</div>
-</div>
-
-### Performance Improvement
-The engineered features and the more complex model structure allowed the final model to better understand the complex drivers of power outages, resulting in a substantial performance gain. This highlights the importance of domain-specific feature creation in building effective predictive models.
-
-</div>
-
-<div class="conclusion-section">
-  <h2>Summary of Dataset Insights</h2>
-
-  <p><strong>Total outage events analyzed:</strong> 1,471 (after cleaning)</p>
-
-  <h3>Most Common Cause of Outages</h3>
+  <h3>Prediction Problem Statement</h3>
   <p>
-    The most frequently reported category of power outage is <strong>severe weather</strong>, accounting for <strong>740 incidents</strong> across the dataset — nearly 50% of all cases. This aligns with expectations given the frequency of storms, hurricanes, and extreme seasonal events across the United States.
+    We aim to predict the <strong>cause of a major power outage</strong> in the United States using relevant environmental, regional, and temporal data available at the time of the outage.
+    The goal is to assist utility companies and policy-makers in proactively identifying risk factors and preparing mitigation strategies.
   </p>
 
-  <h3>Average Outage Duration by Cause</h3>
+  <ul>
+    <li><strong>Problem Type:</strong> Multiclass classification</li>
+    <li><strong>Response Variable:</strong> <code>CAUSE.CATEGORY</code> — this column represents the high-level cause of the power outage (e.g., intentional attack, equipment failure, public appeal, etc.). We chose this variable because understanding the cause of an outage has practical value for prevention and planning.</li>
+    <li><strong>Evaluation Metric:</strong> Macro-averaged F1-score — this metric is ideal for imbalanced classes as it gives equal weight to all categories, including rare but critical causes.</li>
+  </ul>
+
+  <h3>Model Approach</h3>
+  <p>We're building a <strong>predictive model</strong> (not inferential), meaning we only use features that would be known at the time of the outage, such as:</p>
+  <ul>
+    <li>Weather forecasts</li>
+    <li>Historical outage patterns</li>
+    <li>Geographic and infrastructure characteristics</li>
+    <li>Seasonal and temporal features</li>
+  </ul>
+
+  <h3>Variables Used in the Model</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Variable Name</th>
+        <th>Description</th>
+        <th>Data Type</th>
+        <th>Role in Model</th>
+        <th>Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="5"><strong>Response Variable</strong></td></tr>
+      <tr><td>CAUSE.CATEGORY</td><td>High-level cause of power outage</td><td>Categorical</td><td>Target Variable</td><td>DOE Database</td></tr>
+      <tr><td colspan="5"><strong>Temporal Features</strong></td></tr>
+      <tr><td>YEAR</td><td>Year of outage</td><td>Integer</td><td>Predictor</td><td>DOE Database</td></tr>
+      <tr><td>MONTH</td><td>Month of outage</td><td>Integer</td><td>Predictor</td><td>DOE Database</td></tr>
+      <tr><td>OUTAGE.START</td><td>Outage start timestamp</td><td>DateTime</td><td>Predictor</td><td>DOE Database</td></tr>
+      <tr><td>OUTAGE.RESTORATION</td><td>Outage restoration timestamp</td><td>DateTime</td><td>Predictor</td><td>DOE Database</td></tr>
+      <tr><td>DURATION_HOURS</td><td>Duration of outage in hours</td><td>Float</td><td>Predictor</td><td>Calculated</td></tr>
+      <tr><td colspan="5"><strong>Geographic Features</strong></td></tr>
+      <tr><td>U.S._STATE</td><td>State where outage occurred</td><td>Categorical</td><td>Predictor</td><td>DOE Database</td></tr>
+      <tr><td>CLIMATE.REGION</td><td>Climate region classification</td><td>Categorical</td><td>Predictor</td><td>DOE Database</td></tr>
+      <tr><td>LAT</td><td>Latitude of state center</td><td>Float</td><td>Predictor</td><td>Calculated</td></tr>
+      <tr><td>LON</td><td>Longitude of state center</td><td>Float</td><td>Predictor</td><td>Calculated</td></tr>
+      <tr><td colspan="5"><strong>Weather & Climate Features</strong></td></tr>
+      <tr><td>ANOMALY.LEVEL</td><td>Temperature anomaly level</td><td>Float</td><td>Predictor</td><td>Climate Data</td></tr>
+      <tr><td>CLIMATE.CATEGORY</td><td>Climate condition (normal, warm, cold)</td><td>Categorical</td><td>Predictor</td><td>Climate Data</td></tr>
+      <tr><td colspan="5"><strong>Impact & Severity Features</strong></td></tr>
+      <tr><td>CUSTOMERS.AFFECTED</td><td>Number of customers impacted</td><td>Integer</td><td>Predictor</td><td>DOE Database</td></tr>
+      <tr><td colspan="5"><strong>Demographic & Land Use Features</strong></td></tr>
+      <tr><td>POPDEN_URBAN</td><td>Urban population density</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
+      <tr><td>POPDEN_RURAL</td><td>Rural population density</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
+      <tr><td>AREAPCT_URBAN</td><td>% of urban area</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
+      <tr><td>AREAPCT_UC</td><td>% of urban cluster area</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
+      <tr><td>PCT_LAND</td><td>% of land area</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
+      <tr><td>PCT_WATER_TOT</td><td>Total % of water area</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
+      <tr><td>PCT_WATER_INLAND</td><td>% of inland water</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Variable Importance and Categorization</h4>
+  <ul>
+    <li><strong>Primary Predictors:</strong> Weather and climate variables (e.g., <code>ANOMALY.LEVEL</code>, <code>CLIMATE.CATEGORY</code>), geographic indicators, and outage timing.</li>
+    <li><strong>Secondary Predictors:</strong> Population characteristics and prior impact indicators (e.g., <code>CUSTOMERS.AFFECTED</code>).</li>
+    <li><strong>Feature Engineering:</strong> We derived <code>DURATION_HOURS</code>, <code>LAT</code>, and <code>LON</code> for modeling purposes, and extracted seasonal indicators from <code>MONTH</code>.</li>
+  </ul>
+
+  <h4>Data Quality Considerations</h4>
+  <ul>
+    <li>Handled missing values using strategic imputation and filtering.</li>
+    <li>Applied appropriate type conversions and validations.</li>
+    <li>Encoded categorical variables using one-hot encoding.</li>
+    <li>Scaled numerical variables to support model convergence.</li>
+  </ul>
+
+</div>
+
+
+<div class="project-section">
+
+  <h2>4. Baseline Model</h2>
+
+  <h3>Model Description</h3>
+  <p>
+    To establish a performance benchmark, our baseline model utilizes a <strong>Logistic Regression</strong> classifier. This model was chosen for its simplicity and interpretability, providing a clear starting point for evaluating more complex models.
+  </p>
+
+  <h3>Features Used</h3>
+  <ul>
+    <li><strong>Quantitative:</strong> ANOMALY.LEVEL, DURATION_HOURS, CUSTOMERS.AFFECTED</li>
+    <li><strong>Categorical:</strong> U.S._STATE, CLIMATE.CATEGORY, CLIMATE.REGION (One-Hot Encoded)</li>
+    <li><strong>Temporal:</strong> MONTH, YEAR</li>
+  </ul>
+
+  <h3>Preprocessing</h3>
+  <p>
+    All preprocessing steps were encapsulated in a <code>sklearn</code> Pipeline to ensure consistency and prevent data leakage:
+  </p>
+  <ul>
+    <li><strong>Categorical Encoding:</strong> One-Hot encoding for categorical variables.</li>
+    <li><strong>Feature Scaling:</strong> StandardScaler applied to numerical features.</li>
+    <li><strong>Train-Test Split:</strong> 80% training, 20% testing</li>
+  </ul>
+
+
+  <h3>Assessment</h3>
+  <p>
+    The baseline logistic regression model achieved an overall accuracy of <strong>80%</strong>, largely due to its performance on the most frequent class (<strong>severe weather</strong>), which dominates the dataset. However, the <strong>macro F1-score of 0.35</strong> highlights poor performance on rare but critical outage causes like <em>fuel supply emergency</em> and <em>public appeal</em>. This motivates the need for more sophisticated models that can better handle class imbalance and nonlinear relationships.
+  </p>
+
+<div class="project-section">
+  <h2>5. Final Model</h2>
+
+  <h3>Model Enhancement</h3>
+  <p>
+    Our final model improves upon the baseline by incorporating engineered features and a more powerful algorithm. We used a <strong>Random Forest Classifier</strong>, which captures complex nonlinear interactions between variables and is robust to noise and outliers.
+  </p>
+
+  <h3>Enhanced Features</h3>
+  <ul>
+    <li><strong>Log-Transformed Numerical Features</strong>: Applied <code>log1p</code> to <code>CUSTOMERS.AFFECTED</code> and <code>DURATION_HOURS</code> to reduce skewness and improve numerical stability.</li>
+    <li><strong>Seasonal Feature</strong>: Extracted <code>SEASON</code> from the <code>MONTH</code> column using a custom transformer and one-hot encoded it.</li>
+  </ul>
+
+  <h3>Pipeline and Preprocessing</h3>
+  <p>
+    We used a <code>sklearn</code> <strong>Pipeline</strong> to ensure all transformations and modeling steps were cleanly encapsulated. The pipeline includes:
+  </p>
+  <ul>
+    <li><strong>One-Hot Encoding</strong> for categorical variables: <code>U.S._STATE</code>, <code>CLIMATE.CATEGORY</code>, and derived <code>SEASON</code></li>
+    <li><strong>Standard Scaling</strong> and <code>log1p</code> transformation for numerical features</li>
+    <li><strong>Random Forest</strong> for final prediction</li>
+  </ul>
+
+  <h3>Hyperparameter Tuning</h3>
+  <p>
+    We performed a grid search over the following parameters:
+  </p>
+  <ul>
+    <li><code>n_estimators</code>: 50, 100</li>
+    <li><code>max_depth</code>: 5, 10, 15</li>
+    <li><code>min_samples_split</code>: 2, 5</li>
+  </ul>
+  <p>
+    <strong>Best Parameters:</strong> <code>max_depth=15</code>, <code>min_samples_split=2</code>, <code>n_estimators=50</code>
+  </p>
+
+  <h3>Final Model Performance</h3>
+  <div class="model-performance">
+    <div class="performance-metric">
+      <h4>F1-Score (Macro)</h4>
+      <div class="value">0.40</div>
+    </div>
+    <div class="performance-metric">
+      <h4>Accuracy</h4>
+      <div class="value">86%</div>
+    </div>
+    <div class="performance-metric">
+      <h4>Precision</h4>
+      <div class="value">0.80</div>
+    </div>
+    <div class="performance-metric">
+      <h4>Recall</h4>
+      <div class="value">0.86</div>
+    </div>
+  </div>
+
+  <h3>Classification Breakdown</h3>
+  <p>The table below summarizes precision, recall, and F1-score by cause category:</p>
   <table>
     <thead>
       <tr>
         <th>Cause Category</th>
-        <th>Avg. Duration (Hours)</th>
+        <th>Precision</th>
+        <th>Recall</th>
+        <th>F1-score</th>
+        <th>Support</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>Fuel Supply Emergency</td><td><strong>224.89</strong></td></tr>
-      <tr><td>Severe Weather</td><td>64.98</td></tr>
-      <tr><td>Equipment Failure</td><td>30.30</td></tr>
-      <tr><td>Public Appeal</td><td>24.47</td></tr>
-      <tr><td>System Operability Disruption</td><td>12.22</td></tr>
-      <tr><td>Intentional Attack</td><td>7.17</td></tr>
-      <tr><td>Islanding</td><td>3.34</td></tr>
+      <tr><td>Equipment Failure</td><td>0.00</td><td>0.00</td><td>0.00</td><td>5</td></tr>
+      <tr><td>Fuel Supply Emergency</td><td>0.00</td><td>0.00</td><td>0.00</td><td>1</td></tr>
+      <tr><td>Intentional Attack</td><td>0.93</td><td>0.95</td><td>0.94</td><td>39</td></tr>
+      <tr><td>Islanding</td><td>0.80</td><td>0.57</td><td>0.67</td><td>7</td></tr>
+      <tr><td>Public Appeal</td><td>0.00</td><td>0.00</td><td>0.00</td><td>4</td></tr>
+      <tr><td>Severe Weather</td><td>0.87</td><td>0.98</td><td>0.92</td><td>140</td></tr>
+      <tr><td>System Operability Disruption</td><td>0.40</td><td>0.25</td><td>0.31</td><td>16</td></tr>
     </tbody>
   </table>
 
   <p>
-    While <strong>fuel supply emergencies</strong> are rare, they cause outages that last over <strong>9 days</strong> on average, making them extremely disruptive. In contrast, <strong>intentional attacks</strong> and <strong>islanding events</strong> tend to be resolved more quickly.
+    While the model performed very well on the most frequent class (<strong>severe weather</strong>) and <strong>intentional attack</strong>, it still struggles on underrepresented categories like <strong>fuel supply emergency</strong> and <strong>public appeal</strong>. Further improvements could involve upsampling, class weighting, or advanced models like XGBoost or ensemble methods.
   </p>
-
-  <h3>Regional Weather Risk (Severe Weather Events by Climate Region)</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Climate Region</th>
-        <th>Severe Weather Events</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Northeast</td><td>175</td></tr>
-      <tr><td>Central</td><td>133</td></tr>
-      <tr><td>Southeast</td><td>116</td></tr>
-      <tr><td>South</td><td>106</td></tr>
-      <tr><td>East North Central</td><td>104</td></tr>
-    </tbody>
-  </table>
-
-  <p>
-    These figures show a clear concentration of weather-related outages in the <strong>Eastern and Southeastern U.S.</strong>, especially in regions prone to hurricanes, winter storms, and severe thunderstorms.
-  </p>
-
 </div>
-## Conclusion and Future Work
+<div class="conclusion-section">
+  <h2>Conclusion and Future Work</h2>
 
-### Project Impact
-This project demonstrates the potential of machine learning in predicting power outages, providing valuable tools for:
-- **Utility Companies**: Improved maintenance scheduling and resource allocation
-- **Emergency Responders**: Better preparation for potential large-scale outages
-- **Policy Makers**: Data-driven infrastructure investment decisions
+  <h3>Project Impact</h3>
+  <p>
+    This project demonstrates how machine learning can be effectively applied to predict the causes of major power outages in the United States.
+    By analyzing historical outage data alongside geographic and climatic variables, we provide data-driven tools to support:
+  </p>
+  <ul>
+    <li><strong>Utility Companies</strong>: Enhancing outage preparedness, improving infrastructure maintenance, and optimizing resource allocation.</li>
+    <li><strong>Emergency Responders</strong>: Facilitating proactive deployment planning and disaster response strategies.</li>
+    <li><strong>Policy Makers</strong>: Supporting data-informed investments in regional grid resilience and environmental risk mitigation.</li>
+  </ul>
 
-### Key Achievements
-- Successfully built a predictive model for power outages with [X]% accuracy
-- Identified key factors contributing to outage likelihood
-- Created interactive visualizations for stakeholder engagement
-- Developed a scalable pipeline for real-time predictions
+  <h3>Key Achievements</h3>
+  <ul>
+    <li>Built a robust machine learning pipeline capable of classifying outage causes based on regional, temporal, and environmental data.</li>
+    <li>Engineered meaningful features such as outage duration and seasonal indicators, improving model performance and interpretability.</li>
+    <li>Achieved a strong benchmark with a Random Forest classifier, reaching 86% accuracy and a macro F1-score of 0.40.</li>
+    <li>Created a suite of interactive visualizations to communicate findings to stakeholders and domain experts.</li>
+  </ul>
 
-### Future Enhancements
-- **Real-time Integration**: Connect with live weather data feeds
-- **Geographic Expansion**: Extend analysis to international datasets
-- **Advanced Features**: Incorporate satellite imagery and social media data
-- **Deployment**: Develop web-based prediction tools for end users
+  <h3>Future Enhancements</h3>
+  <ul>
+    <li><strong>Real-time Integration:</strong> Connect the model with live weather feeds and energy infrastructure APIs for up-to-date predictions.</li>
+    <li><strong>Geographic Expansion:</strong> Extend the model to include international outage datasets for global utility insights.</li>
+    <li><strong>Advanced Features:</strong> Incorporate satellite imagery, social media signals, and vegetation indices to capture additional risk factors.</li>
+    <li><strong>Model Deployment:</strong> Develop a user-facing web application that offers localized outage cause prediction based on incoming conditions.</li>
+  </ul>
 
-### Technical Contributions
-- Novel feature engineering approaches for outage prediction
-- Advanced visualization techniques for geographic data
-- Scalable machine learning pipeline for large datasets
-- Interactive tools for stakeholder engagement
+  <h3>Technical Contributions</h3>
+  <ul>
+    <li>Implemented a full-stack machine learning workflow using Scikit-learn pipelines and GridSearchCV for reproducible experimentation.</li>
+    <li>Developed interpretable, data-driven insights through feature engineering and model diagnostics.</li>
+    <li>Integrated interactive Plotly visualizations and custom HTML outputs to engage diverse audiences.</li>
+  </ul>
 
+  <p>
+    Overall, our work showcases the value of combining public datasets, machine learning, and domain expertise to improve infrastructure planning and societal resilience.
+  </p>
+</div>
