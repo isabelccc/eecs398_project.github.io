@@ -59,6 +59,8 @@ subheading: "A comprehensive analysis using machine learning to predict and unde
 <p>Power outages can have significant economic and social impacts, affecting everything from healthcare facilities to transportation systems. Understanding and predicting these events can help utility companies improve infrastructure resilience and emergency response planning.</p>
 
 </div>
+
+
 <div class="project-section">
   <h2>2. Data Cleaning and Exploratory Data Analysis</h2>
 
@@ -187,8 +189,6 @@ The coastal regions—particularly the Southeast (e.g., Florida, North Carolina)
     These regions are more exposed to extreme weather events like hurricanes and winter storms. The finding emphasizes that regional climate
     characteristics are critical predictors of outage risk, making them essential components in building robust predictive models.
   </p>
-
-
 </div>
 
 <div class="project-section">
@@ -215,48 +215,32 @@ The coastal regions—particularly the Southeast (e.g., Florida, North Carolina)
     <li>Geographic and infrastructure characteristics</li>
     <li>Seasonal and temporal features</li>
   </ul>
+<h3>Variables Used in the Model</h3>
 
-  <h3>Variables Used in the Model</h3>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Variable Name</th>
-        <th>Description</th>
-        <th>Data Type</th>
-        <th>Role in Model</th>
-        <th>Source</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td colspan="5"><strong>Response Variable</strong></td></tr>
-      <tr><td>CAUSE.CATEGORY</td><td>High-level cause of power outage</td><td>Categorical</td><td>Target Variable</td><td>DOE Database</td></tr>
-      <tr><td colspan="5"><strong>Temporal Features</strong></td></tr>
-      <tr><td>YEAR</td><td>Year of outage</td><td>Integer</td><td>Predictor</td><td>DOE Database</td></tr>
-      <tr><td>MONTH</td><td>Month of outage</td><td>Integer</td><td>Predictor</td><td>DOE Database</td></tr>
-      <tr><td>OUTAGE.START</td><td>Outage start timestamp</td><td>DateTime</td><td>Predictor</td><td>DOE Database</td></tr>
-      <tr><td>OUTAGE.RESTORATION</td><td>Outage restoration timestamp</td><td>DateTime</td><td>Predictor</td><td>DOE Database</td></tr>
-      <tr><td>DURATION_HOURS</td><td>Duration of outage in hours</td><td>Float</td><td>Predictor</td><td>Calculated</td></tr>
-      <tr><td colspan="5"><strong>Geographic Features</strong></td></tr>
-      <tr><td>U.S._STATE</td><td>State where outage occurred</td><td>Categorical</td><td>Predictor</td><td>DOE Database</td></tr>
-      <tr><td>CLIMATE.REGION</td><td>Climate region classification</td><td>Categorical</td><td>Predictor</td><td>DOE Database</td></tr>
-      <tr><td>LAT</td><td>Latitude of state center</td><td>Float</td><td>Predictor</td><td>Calculated</td></tr>
-      <tr><td>LON</td><td>Longitude of state center</td><td>Float</td><td>Predictor</td><td>Calculated</td></tr>
-      <tr><td colspan="5"><strong>Weather & Climate Features</strong></td></tr>
-      <tr><td>ANOMALY.LEVEL</td><td>Temperature anomaly level</td><td>Float</td><td>Predictor</td><td>Climate Data</td></tr>
-      <tr><td>CLIMATE.CATEGORY</td><td>Climate condition (normal, warm, cold)</td><td>Categorical</td><td>Predictor</td><td>Climate Data</td></tr>
-      <tr><td colspan="5"><strong>Impact & Severity Features</strong></td></tr>
-      <tr><td>CUSTOMERS.AFFECTED</td><td>Number of customers impacted</td><td>Integer</td><td>Predictor</td><td>DOE Database</td></tr>
-      <tr><td colspan="5"><strong>Demographic & Land Use Features</strong></td></tr>
-      <tr><td>POPDEN_URBAN</td><td>Urban population density</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
-      <tr><td>POPDEN_RURAL</td><td>Rural population density</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
-      <tr><td>AREAPCT_URBAN</td><td>% of urban area</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
-      <tr><td>AREAPCT_UC</td><td>% of urban cluster area</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
-      <tr><td>PCT_LAND</td><td>% of land area</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
-      <tr><td>PCT_WATER_TOT</td><td>Total % of water area</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
-      <tr><td>PCT_WATER_INLAND</td><td>% of inland water</td><td>Float</td><td>Predictor</td><td>Census Data</td></tr>
-    </tbody>
-  </table>
+<table>
+  <thead>
+    <tr>
+      <th>Variable Name</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Role in Model</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td colspan="5"><strong>Response Variable</strong></td></tr>
+    <tr><td>CAUSE.CATEGORY</td><td>High-level cause of power outage</td><td>Categorical</td><td>Target</td><td>DOE Database</td></tr>
+    
+    <tr><td colspan="5"><strong>Predictor Variables</strong></td></tr>
+    <tr><td>YEAR</td><td>Year of outage</td><td>Integer</td><td>Predictor</td><td>DOE Database</td></tr>
+    <tr><td>MONTH</td><td>Month of outage</td><td>Integer</td><td>Predictor</td><td>DOE Database</td></tr>
+    <tr><td>U.S._STATE</td><td>State where outage occurred</td><td>Categorical</td><td>Predictor</td><td>DOE Database</td></tr>
+    <tr><td>CLIMATE.CATEGORY</td><td>Climate condition (normal, warm, cold)</td><td>Categorical</td><td>Predictor</td><td>Climate Data</td></tr>
+    <tr><td>CUSTOMERS.AFFECTED</td><td>Number of customers affected</td><td>Integer</td><td>Predictor</td><td>DOE Database</td></tr>
+    <tr><td>ANOMALY.LEVEL</td><td>Temperature anomaly level</td><td>Float</td><td>Predictor</td><td>Climate Data</td></tr>
+    <tr><td>SEASON</td><td>Season derived from MONTH</td><td>Categorical</td><td>Engineered</td><td>Derived</td></tr>
+  </tbody>
+</table>
 
   <h4>Variable Importance and Categorization</h4>
   <ul>
