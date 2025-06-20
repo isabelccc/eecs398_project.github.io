@@ -173,6 +173,45 @@ Next, we investigated the relationship between environmental factors and power o
 </div>
 
 <div class="project-section">
+## Further Visual Analysis
+
+To deepen our understanding, we created additional visualizations focusing on different dimensions of the outage data.
+
+### Temporal Trends: Outages Over Time
+This line chart helps us identify seasonality and long-term trends in power outage occurrences.
+
+<div class="plot-container">
+  <iframe src="/project/outages_over_time.html" width="100%" height="500px" frameborder="0"></iframe>
+  <p><strong>Analysis:</strong> This visualization tracks the number of power outages month by month. Clear seasonal peaks can be observed, particularly during the summer and winter months, which typically correspond to periods of extreme weather. This confirms the seasonal patterns suggested in our initial EDA and highlights the predictive power of time-based features.</p>
+</div>
+
+### Severity Analysis: Outage Duration by Cause
+Understanding which types of incidents lead to the longest outages is crucial for resource planning.
+
+<div class="plot-container">
+  <iframe src="/project/duration_by_cause.html" width="100%" height="500px" frameborder="0"></iframe>
+  <p><strong>Analysis:</strong> This bar chart compares the average outage duration for different causes. It reveals that events like severe weather lead to significantly longer restoration times compared to equipment failure. This insight can help utility companies prioritize and allocate resources more effectively during different types of crises.</p>
+</div>
+
+### Impact Analysis: Customers Affected vs. Duration
+This scatter plot explores the relationship between the number of customers affected and the duration of the outage.
+
+<div class="plot-container">
+  <iframe src="/project/customers_vs_duration.html" width="100%" height="500px" frameborder="0"></iframe>
+  <p><strong>Analysis:</strong> By plotting the number of customers affected against outage duration, we can identify large-scale, high-impact events. The use of a log scale reveals that while most outages are relatively small and short, a number of significant events affect a large number of customers for extended periods. These are the critical events our model aims to predict.</p>
+</div>
+
+### Regional Analysis: Outages by Climate Zone
+This treemap provides a proportional view of outage distribution across different climate regions.
+
+<div class="plot-container">
+  <iframe src="/project/outages_by_region.html" width="100%" height="500px" frameborder="0"></iframe>
+  <p><strong>Analysis:</strong> This visualization breaks down the total number of outages by climate region. It offers a different perspective from the state-level map, highlighting that certain climate zones are inherently more susceptible to power disruptions. This reinforces the idea that regional climate characteristics are a strong predictive signal.</p>
+</div>
+
+</div>
+
+<div class="project-section">
 
 ## 3. Framing a Prediction Problem
 
@@ -312,7 +351,60 @@ The engineered features and the more complex model structure allowed the final m
 </div>
 
 <div class="conclusion-section">
+  <h2>Summary of Dataset Insights</h2>
 
+  <p><strong>Total outage events analyzed:</strong> 1,471 (after cleaning)</p>
+
+  <h3>Most Common Cause of Outages</h3>
+  <p>
+    The most frequently reported category of power outage is <strong>severe weather</strong>, accounting for <strong>740 incidents</strong> across the dataset — nearly 50% of all cases. This aligns with expectations given the frequency of storms, hurricanes, and extreme seasonal events across the United States.
+  </p>
+
+  <h3>Average Outage Duration by Cause</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Cause Category</th>
+        <th>Avg. Duration (Hours)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Fuel Supply Emergency</td><td><strong>224.89</strong></td></tr>
+      <tr><td>Severe Weather</td><td>64.98</td></tr>
+      <tr><td>Equipment Failure</td><td>30.30</td></tr>
+      <tr><td>Public Appeal</td><td>24.47</td></tr>
+      <tr><td>System Operability Disruption</td><td>12.22</td></tr>
+      <tr><td>Intentional Attack</td><td>7.17</td></tr>
+      <tr><td>Islanding</td><td>3.34</td></tr>
+    </tbody>
+  </table>
+
+  <p>
+    While <strong>fuel supply emergencies</strong> are rare, they cause outages that last over <strong>9 days</strong> on average, making them extremely disruptive. In contrast, <strong>intentional attacks</strong> and <strong>islanding events</strong> tend to be resolved more quickly.
+  </p>
+
+  <h3>Regional Weather Risk (Severe Weather Events by Climate Region)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Climate Region</th>
+        <th>Severe Weather Events</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Northeast</td><td>175</td></tr>
+      <tr><td>Central</td><td>133</td></tr>
+      <tr><td>Southeast</td><td>116</td></tr>
+      <tr><td>South</td><td>106</td></tr>
+      <tr><td>East North Central</td><td>104</td></tr>
+    </tbody>
+  </table>
+
+  <p>
+    These figures show a clear concentration of weather-related outages in the <strong>Eastern and Southeastern U.S.</strong>, especially in regions prone to hurricanes, winter storms, and severe thunderstorms.
+  </p>
+
+</div>
 ## Conclusion and Future Work
 
 ### Project Impact
