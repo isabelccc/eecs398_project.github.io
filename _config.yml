@@ -54,15 +54,6 @@ favicon: "" # the favicon for your site
 # refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
 yat:
   date_format: "%b %d, %Y"
-  sidebar:
-    - name: "Home"
-      url: /
-    - name: "EDA"
-      url: /pages/eda
-    - name: "Model"
-      url: /pages/model
-    - name: "Conclusion"
-      url: /pages/conclusion
 
 # If you want more debug log, you can set true
 # debug: false

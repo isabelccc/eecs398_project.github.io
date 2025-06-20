@@ -1,11 +1,6 @@
----
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
-layout: page
-title: "EECS 398 Final Project - Power Outage Prediction"
-permalink: /
----
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<div class="project-container">
 
 # EECS 398 Final Project: Predicting Power Outages in the U.S.
 
@@ -18,6 +13,8 @@ This project analyzes power outage patterns across the United States using machi
 **Course**: EECS 398 - Practical Data Science (Spring 2025)
 
 ---
+
+<div class="project-section">
 
 ## 1. Introduction and Question Identification
 
@@ -34,7 +31,9 @@ Power outages can have significant economic and social impacts, affecting everyt
 
 [View the complete analysis in our Jupyter notebook](/project/project.ipynb)
 
----
+</div>
+
+<div class="project-section">
 
 ## 2. Data Cleaning and Exploratory Data Analysis
 
@@ -61,13 +60,17 @@ We explored relationships between different variables to identify potential corr
   <p><em>Interactive map showing the relationship between weather conditions and outage occurrences. This visualization reveals how extreme weather events correlate with power disruptions.</em></p>
 </div>
 
+<div class="key-findings">
 ### Key Findings from EDA
 - **Geographic Patterns**: Certain regions show higher outage frequencies due to weather patterns and infrastructure age
 - **Seasonal Trends**: Outages peak during extreme weather seasons (winter storms, summer heat waves)
 - **Weather Correlation**: Strong correlation between extreme weather events and outage occurrences
 - **Infrastructure Impact**: Older infrastructure shows higher vulnerability to weather-related outages
+</div>
 
----
+</div>
+
+<div class="project-section">
 
 ## 3. Framing a Prediction Problem
 
@@ -85,13 +88,28 @@ We're building a **predictive model** (not inferential) because our goal is to f
 - Geographic and infrastructure characteristics
 - Seasonal and temporal features
 
-### Feature Categories
-- **Weather Features**: Temperature, precipitation, wind speed, humidity
-- **Geographic Features**: State, region, population density
-- **Temporal Features**: Time of year, day of week, historical patterns
-- **Infrastructure Features**: Age of power infrastructure, maintenance records
+<div class="feature-list">
+<div class="feature-item">
+<h4>Weather Features</h4>
+Temperature, precipitation, wind speed, humidity
+</div>
+<div class="feature-item">
+<h4>Geographic Features</h4>
+State, region, population density
+</div>
+<div class="feature-item">
+<h4>Temporal Features</h4>
+Time of year, day of week, historical patterns
+</div>
+<div class="feature-item">
+<h4>Infrastructure Features</h4>
+Age of power infrastructure, maintenance records
+</div>
+</div>
 
----
+</div>
+
+<div class="project-section">
 
 ## 4. Baseline Model
 
@@ -106,25 +124,54 @@ Our baseline model uses a **Logistic Regression** classifier with the following 
 - **Feature Scaling**: StandardScaler applied to numerical features
 - **Pipeline Implementation**: All preprocessing steps implemented in a single sklearn Pipeline
 
-### Baseline Performance
-- **F1-Score**: [To be filled with actual results]
-- **Accuracy**: [To be filled with actual results]
-- **Precision**: [To be filled with actual results]
-- **Recall**: [To be filled with actual results]
+<div class="model-performance">
+<div class="performance-metric">
+<h4>F1-Score</h4>
+<div class="value">[To be filled]</div>
+</div>
+<div class="performance-metric">
+<h4>Accuracy</h4>
+<div class="value">[To be filled]</div>
+</div>
+<div class="performance-metric">
+<h4>Precision</h4>
+<div class="value">[To be filled]</div>
+</div>
+<div class="performance-metric">
+<h4>Recall</h4>
+<div class="value">[To be filled]</div>
+</div>
+</div>
 
 **Assessment**: While the baseline model provides a reasonable starting point, there's significant room for improvement through more sophisticated feature engineering and model selection.
 
----
+</div>
+
+<div class="project-section">
 
 ## 5. Final Model
 
 ### Enhanced Features
 We engineered several new features to improve model performance:
 
-1. **Weather Severity Index**: Combined multiple weather variables into a single severity score
-2. **Historical Outage Frequency**: Rolling average of past outages in the region
-3. **Seasonal Interaction Terms**: Interactions between weather conditions and seasonal patterns
-4. **Geographic Risk Score**: Region-specific risk factors based on infrastructure and historical data
+<div class="feature-list">
+<div class="feature-item">
+<h4>Weather Severity Index</h4>
+Combined multiple weather variables into a single severity score
+</div>
+<div class="feature-item">
+<h4>Historical Outage Frequency</h4>
+Rolling average of past outages in the region
+</div>
+<div class="feature-item">
+<h4>Seasonal Interaction Terms</h4>
+Interactions between weather conditions and seasonal patterns
+</div>
+<div class="feature-item">
+<h4>Geographic Risk Score</h4>
+Region-specific risk factors based on infrastructure and historical data
+</div>
+</div>
 
 ### Model Selection and Hyperparameter Tuning
 We evaluated multiple algorithms including Random Forest, Gradient Boosting, and Support Vector Machines. **Random Forest** performed best for our use case.
@@ -137,11 +184,24 @@ We evaluated multiple algorithms including Random Forest, Gradient Boosting, and
 
 **Tuning Method**: GridSearchCV with 5-fold cross-validation
 
-### Final Model Performance
-- **F1-Score**: [To be filled with actual results]
-- **Accuracy**: [To be filled with actual results]
-- **Precision**: [To be filled with actual results]
-- **Recall**: [To be filled with actual results]
+<div class="model-performance">
+<div class="performance-metric">
+<h4>F1-Score</h4>
+<div class="value">[To be filled]</div>
+</div>
+<div class="performance-metric">
+<h4>Accuracy</h4>
+<div class="value">[To be filled]</div>
+</div>
+<div class="performance-metric">
+<h4>Precision</h4>
+<div class="value">[To be filled]</div>
+</div>
+<div class="performance-metric">
+<h4>Recall</h4>
+<div class="value">[To be filled]</div>
+</div>
+</div>
 
 ### Performance Improvement
 Our final model shows significant improvement over the baseline:
@@ -152,7 +212,9 @@ Our final model shows significant improvement over the baseline:
 ### Model Interpretability
 The Random Forest model provides feature importance rankings, helping us understand which factors most strongly influence outage predictions. This insight is valuable for utility companies and emergency planners.
 
----
+</div>
+
+<div class="conclusion-section">
 
 ## Conclusion and Future Work
 
@@ -180,7 +242,12 @@ This project demonstrates the potential of machine learning in predicting power 
 - Scalable machine learning pipeline for large datasets
 - Interactive tools for stakeholder engagement
 
----
+</div>
 
+<div class="project-links">
 **View the complete analysis**: [Jupyter Notebook](/project/project.ipynb)  
 **Interactive Maps**: [Outage Map](/project/outages_map.html) | [Grid Map](/project/folium_outage_gridmap.html)
+</div>
+
+</div>
+</body></html>

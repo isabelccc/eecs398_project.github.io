@@ -1,0 +1,197 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+// Default theme colors
+$theme-colors: (
+  "coolblack": #090a0b,
+  "spacegrey": #353535,
+  "snowwhite": #ffffff,
+);
+
+// Default brand colors
+$brand-colors: (
+  "orangered": #ff5100,
+  "greatgold": #f2cb05,
+  "greenblue": #389092,
+);
+
+$theme-name: "{{ site.theme_color }}";
+$brand-name: "{{ site.brand_color }}";
+$theme-color: map-get($theme-colors, "snowwhite");
+$brand-color: map-get($brand-colors, "orangered");
+
+@if map-has-key($theme-colors, $theme-name) {
+  $theme-color: map-get($theme-colors, $theme-name);
+} @else if str-index($theme-name, "#") == 1 {
+  $theme-color: {{ site.theme_color | default: '#ffffff' }};
+}
+
+@if map-has-key($brand-colors, $brand-name) {
+  $brand-color: map-get($brand-colors, $brand-name);
+} @else if str-index($brand-name, "#") == 1 {
+  $brand-color: {{ site.brand_color | default: '#ff5100' }};
+}
+
+$content-width: {{ site.content_width | default: '920px' }};
+
+@import "yat";
+
+// Custom styles for the single-page project layout
+.project-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.project-section {
+  margin-bottom: 60px;
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border-left: 4px solid $brand-color;
+}
+
+.project-section h2 {
+  color: $brand-color;
+  border-bottom: 2px solid $brand-color;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+.plot-container {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.plot-container iframe {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.plot-container p {
+  margin-top: 15px;
+  font-style: italic;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.key-findings {
+  background: #e8f4fd;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  border-left: 4px solid #007bff;
+}
+
+.key-findings h3 {
+  color: #007bff;
+  margin-top: 0;
+}
+
+.model-performance {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.performance-metric {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.performance-metric h4 {
+  margin: 0 0 10px 0;
+  color: $brand-color;
+}
+
+.performance-metric .value {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.feature-item {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.feature-item h4 {
+  margin: 0 0 10px 0;
+  color: $brand-color;
+}
+
+.conclusion-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 40px;
+  border-radius: 15px;
+  margin: 40px 0;
+}
+
+.conclusion-section h2 {
+  color: white;
+  border-bottom: 2px solid white;
+}
+
+.conclusion-section h3 {
+  color: #f0f0f0;
+}
+
+.project-links {
+  text-align: center;
+  margin: 40px 0;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.project-links a {
+  display: inline-block;
+  margin: 0 15px;
+  padding: 10px 20px;
+  background: $brand-color;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.project-links a:hover {
+  background: darken($brand-color, 10%);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .project-section {
+    padding: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .model-performance {
+    grid-template-columns: 1fr;
+  }
+  
+  .feature-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .project-links a {
+    display: block;
+    margin: 10px 0;
+  }
+}
