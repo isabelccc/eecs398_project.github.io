@@ -149,10 +149,10 @@ This interactive map visualizes the geographic distribution and severity of powe
 
 The coastal regions—particularly the Southeast (e.g., Florida, North Carolina), Gulf Coast (e.g., Texas, Louisiana), and the West Coast (e.g., California)—show a higher concentration of severe outages. These areas are more prone to hurricanes, wildfires, and heavy storms, aligning with known climate vulnerabilities. In contrast, many inland regions experience fewer or less severe outages, indicated by smaller green and orange markers. This spatial pattern highlights the importance of incorporating regional climate risk into outage prediction models and utility infrastructure planning.
 </p>
-</div>
 
 
-<div class="project-section">
+
+
 
   <h2>Further Visual Analysis</h2>
 
@@ -172,27 +172,22 @@ The coastal regions—particularly the Southeast (e.g., Florida, North Carolina)
 
   <p><strong>Analysis:</strong> This bar chart compares the average outage duration for different causes. It reveals that events like severe weather lead to significantly longer restoration times compared to equipment failure. This insight can help utility companies prioritize and allocate resources more effectively during different types of crises.</p>
 
-</div>
 
 
-### Regional Analysis: Outages by Climate Zone
-This treemap provides a proportional view of outage distribution across different climate regions.
-
-<iframe src="{{ site.baseurl }}/outages_by_region.html" width="100%" height="500px" frameborder="0"></iframe>
-
-**Analysis:** This visualization breaks down the total number of outages by climate region. It offers a different perspective from the state-level map, highlighting that certain climate zones are inherently more susceptible to power disruptions. This reinforces the idea that regional climate characteristics are a strong predictive signal.
-
-</div>
-
-<div class="project-section">
-<div class="project-section">
-
-  <h3>Regional Analysis: Outages by Climate Zone</h3>
-  <p>This treemap provides a proportional view of outage distribution across different climate regions.</p>
+ <h3>Regional Analysis: Outages by Climate Zone</h3>
+  <p>
+    This treemap provides a proportional view of outage distribution across different climate regions.
+  </p>
 
   <iframe src="{{ site.baseurl }}/outages_by_region.html" width="100%" height="500px" frameborder="0"></iframe>
 
-  <p><strong>Analysis:</strong> This visualization breaks down the total number of outages by climate region. It offers a different perspective from the state-level map, highlighting that certain climate zones—especially the Southeast and Northeast—are inherently more susceptible to power disruptions. This reinforces the idea that regional climate characteristics are a strong predictive signal.</p>
+  <p><strong>Analysis:</strong>
+    This visualization breaks down the total number of outages by climate region. It provides a complementary perspective to the state-level map,
+    revealing that certain climate zones—particularly the Southeast and Northeast—experience a higher frequency of power disruptions.
+    These regions are more exposed to extreme weather events like hurricanes and winter storms. The finding emphasizes that regional climate
+    characteristics are critical predictors of outage risk, making them essential components in building robust predictive models.
+  </p>
+
 
 </div>
 
@@ -312,6 +307,7 @@ This treemap provides a proportional view of outage distribution across differen
   <p>
     The baseline logistic regression model achieved an overall accuracy of <strong>80%</strong>, largely due to its performance on the most frequent class (<strong>severe weather</strong>), which dominates the dataset. However, the <strong>macro F1-score of 0.35</strong> highlights poor performance on rare but critical outage causes like <em>fuel supply emergency</em> and <em>public appeal</em>. This motivates the need for more sophisticated models that can better handle class imbalance and nonlinear relationships.
   </p>
+  </div>
 
 <div class="project-section">
   <h2>5. Final Model</h2>
