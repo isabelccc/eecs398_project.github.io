@@ -34,6 +34,7 @@ Our analysis focuses on power outage data collected across the United States, ex
 - What are the primary factors that contribute to power outages?
 - Can we predict the likelihood and severity of power outages based on weather and geographic data?
 - How do different regions of the United States compare in terms of outage frequency and patterns?
+- What are the characteristics of major power outages with higher severity? Variables to consider include location, time, climate, land-use characteristics, electricity consumption patterns, economic characteristics, etc. 
 
 **Why This Matters:**
 Power outages can have significant economic and social impacts, affecting everything from healthcare facilities to transportation systems. Understanding and predicting these events can help utility companies improve infrastructure resilience and emergency response planning.
@@ -51,7 +52,7 @@ A crucial first step in any data science project is understanding the data. We p
 Our raw data required several cleaning and preprocessing steps to prepare it for analysis:
 - **Missing Value Imputation**: Strategically handled missing data points to preserve data integrity.
 - **Data Type Conversion**: Ensured all variables were in the correct format (e.g., converting date strings to datetime objects).
-- **Feature Engineering**: Created new, more predictive features from the existing data, such as extracting the month and year from timestamps.
+- **Feature Engineering**: Created new, more predictive features from the existing data, such as extracting the month and year from timestamps, calculate the duration.
 - **Outlier Detection**: Identified and assessed outliers to prevent them from skewing our analysis and model training.
 
 <h4>Sample of the Dataset:</h4>
@@ -160,7 +161,7 @@ This section provides interactive visualizations of the power outage data, allow
 To understand the geographic distribution of power outages, we analyzed the frequency of incidents by state. This helps us answer: *Where do power outages occur most frequently?*
 
 <div class="plot-container">
-  <iframe src="/project/folium_outage_gridmap.html" width="100%" height="500px" frameborder="0"></iframe>
+  <iframe src="{{ site.baseurl }}/project/folium_outage_gridmap.html" width="100%" height="500px" frameborder="0"></iframe>
   <p><strong>Analysis:</strong> This interactive map displays the concentration of power outages across the United States. Each region is color-coded based on the total number of outage events. The visualization clearly indicates that certain states, particularly those in the Midwest and on the East Coast, experience a higher frequency of power disruptions. This suggests that geographic factors, such as climate patterns and population density, play a significant role.</p>
 </div>
 
@@ -168,7 +169,7 @@ To understand the geographic distribution of power outages, we analyzed the freq
 Next, we investigated the relationship between environmental factors and power outages. This analysis addresses the question: *How do weather events correlate with power disruptions?*
 
 <div class="plot-container">
-  <iframe src="/project/outages_map.html" width="100%" height="500px" frameborder="0"></iframe>
+  <iframe src="{{ site.baseurl }}/project/outages_map.html" width="100%" height="500px" frameborder="0"></iframe>
   <p><strong>Analysis:</strong> This map visualizes the correlation between severe weather events (e.g., storms, high winds) and the location of power outages. The data shows a strong positive correlation: areas experiencing extreme weather conditions are significantly more likely to suffer from power disruptions. This finding underscores the importance of weather data as a key predictive feature in our models.</p>
 </div>
 
@@ -183,7 +184,7 @@ To deepen our understanding, we created additional visualizations focusing on di
 This line chart helps us identify seasonality and long-term trends in power outage occurrences.
 
 <div class="plot-container">
-  <iframe src="/project/outages_over_time.html" width="100%" height="500px" frameborder="0"></iframe>
+  <iframe src="{{ site.baseurl }}/project/outages_over_time.html" width="100%" height="500px" frameborder="0"></iframe>
   <p><strong>Analysis:</strong> This visualization tracks the number of power outages month by month. Clear seasonal peaks can be observed, particularly during the summer and winter months, which typically correspond to periods of extreme weather. This confirms the seasonal patterns suggested in our initial EDA and highlights the predictive power of time-based features.</p>
 </div>
 
@@ -191,7 +192,7 @@ This line chart helps us identify seasonality and long-term trends in power outa
 Understanding which types of incidents lead to the longest outages is crucial for resource planning.
 
 <div class="plot-container">
-  <iframe src="/project/duration_by_cause.html" width="100%" height="500px" frameborder="0"></iframe>
+  <iframe src="{{ site.baseurl }}/project/duration_by_cause.html" width="100%" height="500px" frameborder="0"></iframe>
   <p><strong>Analysis:</strong> This bar chart compares the average outage duration for different causes. It reveals that events like severe weather lead to significantly longer restoration times compared to equipment failure. This insight can help utility companies prioritize and allocate resources more effectively during different types of crises.</p>
 </div>
 
@@ -199,7 +200,7 @@ Understanding which types of incidents lead to the longest outages is crucial fo
 This scatter plot explores the relationship between the number of customers affected and the duration of the outage.
 
 <div class="plot-container">
-  <iframe src="/project/customers_vs_duration.html" width="100%" height="500px" frameborder="0"></iframe>
+  <iframe src="{{ site.baseurl }}/project/customers_vs_duration.html" width="100%" height="500px" frameborder="0"></iframe>
   <p><strong>Analysis:</strong> By plotting the number of customers affected against outage duration, we can identify large-scale, high-impact events. The use of a log scale reveals that while most outages are relatively small and short, a number of significant events affect a large number of customers for extended periods. These are the critical events our model aims to predict.</p>
 </div>
 
@@ -207,7 +208,7 @@ This scatter plot explores the relationship between the number of customers affe
 This treemap provides a proportional view of outage distribution across different climate regions.
 
 <div class="plot-container">
-  <iframe src="/project/outages_by_region.html" width="100%" height="500px" frameborder="0"></iframe>
+  <iframe src="{{ site.baseurl }}/project/outages_by_region.html" width="100%" height="500px" frameborder="0"></iframe>
   <p><strong>Analysis:</strong> This visualization breaks down the total number of outages by climate region. It offers a different perspective from the state-level map, highlighting that certain climate zones are inherently more susceptible to power disruptions. This reinforces the idea that regional climate characteristics are a strong predictive signal.</p>
 </div>
 
@@ -437,7 +438,7 @@ This project demonstrates the potential of machine learning in predicting power 
 
 <div class="project-links">
 **View the complete analysis**: [Jupyter Notebook](/project/project.ipynb)  
-**Interactive Maps**: [Outage Map](/project/outages_map.html) | [Grid Map](/project/folium_outage_gridmap.html)
+**Interactive Maps**: [Outage Map](outages_map.html)
 </div>
 
 </div>
