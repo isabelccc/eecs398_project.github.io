@@ -49,8 +49,8 @@ description: >- # this means to ignore newlines until "baseurl:"
   Predicting Power Outages in the U.S. - A comprehensive analysis using machine learning
   to predict and understand power outage patterns across the United States.
 
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://isabelccc.github.io/eecs398_project.github.io/" # the base hostname & protocol for your site, e.g. https://example.com
+baseurl: "/eecs398_project.github.io" # the subpath of your site, e.g. /blog
+url: "https://isabelccc.github.io" # the base hostname & protocol for your site, e.g. https://example.com
 favicon: "" # the favicon for your site
 
 # Yat date format
@@ -215,9 +215,8 @@ kmarkdown:
   input: GFM
 
 plugins:
+  - jekyll-remote-theme
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-paginate
-  - jekyll-spaceship
-  - jekyll-remote-theme
