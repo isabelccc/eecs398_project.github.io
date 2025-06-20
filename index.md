@@ -5,6 +5,8 @@
 layout: home
 title: "EECS 398 Final Project - Power Outage Prediction"
 permalink: /
+heading: "EECS 398 Final Project: Predicting Power Outages in the U.S."
+subheading: "A comprehensive analysis using machine learning to predict and understand power outage patterns across the United States."
 ---
 
 <div class="project-container">
