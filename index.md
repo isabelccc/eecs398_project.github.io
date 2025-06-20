@@ -11,34 +11,34 @@ subheading: "A comprehensive analysis using machine learning to predict and unde
 
 <div class="project-container">
 
-# EECS 398 Final Project: Predicting Power Outages in the U.S.
+<h1>EECS 398 Final Project: Predicting Power Outages in the U.S.</h1>
 
-## Overview
+<h2>Overview</h2>
 
-This project analyzes power outage patterns across the United States using machine learning techniques. Our goal is to understand the factors that contribute to power outages and build predictive models to help utility companies and emergency responders prepare for potential disruptions.
-
-**Dataset**: Power Outage Data across the United States  
-**Team**: xiulin Chen  
-**Course**: EECS 398 - Practical Data Science (Spring 2025)
-
----
+<p>This project analyzes power outage patterns across the United States using machine learning techniques. Our goal is to understand the factors that contribute to power outages and build predictive models to help utility companies and emergency responders prepare for potential disruptions.</p>
+<ul>
+  <li><strong>Dataset:</strong> Power Outage Data across the United States</li>
+  <li><strong>Team:</strong> Xiulin Chen</li>
+  <li><strong>Course:</strong> EECS 398 - Practical Data Science (Spring 2025)</li>
+</ul>
 
 <div class="project-section">
 
-## 1. Introduction and Question Identification
+<h2>1. Introduction and Question Identification</h2>
 
-### Dataset Overview
-Our analysis focuses on power outage data collected across the United States, examining various factors that contribute to outage occurrences including weather conditions, geographic location, infrastructure age, and historical patterns.
+<h3>Dataset Overview</h3>
+<p>Our analysis focuses on power outage data collected across the United States, examining various factors that contribute to outage occurrences including weather conditions, geographic location, infrastructure age, and historical patterns.</p>
 
-**Key Questions We Investigate:**
-- What are the primary factors that contribute to power outages?
-- Can we predict the likelihood and severity of power outages based on weather and geographic data?
-- How do different regions of the United States compare in terms of outage frequency and patterns?
-- What are the characteristics of major power outages with higher severity? Variables to consider include location, time, climate, land-use characteristics, electricity consumption patterns, economic characteristics, etc. 
+<h4>Key Questions We Investigate:</h4>
+<ul>
+  <li>What are the primary factors that contribute to power outages?</li>
+  <li>Can we predict the likelihood and severity of power outages based on weather and geographic data?</li>
+  <li>How do different regions of the United States compare in terms of outage frequency and patterns?</li>
+  <li>What are the characteristics of major power outages with higher severity?</li>
+</ul>
 
-**Why This Matters:**
-Power outages can have significant economic and social impacts, affecting everything from healthcare facilities to transportation systems. Understanding and predicting these events can help utility companies improve infrastructure resilience and emergency response planning.
-
+<h4>Why This Matters:</h4>
+<p>Power outages can have significant economic and social impacts, affecting everything from healthcare facilities to transportation systems. Understanding and predicting these events can help utility companies improve infrastructure resilience and emergency response planning.</p>
 
 </div>
 
@@ -152,12 +152,7 @@ Our exploratory analysis revealed several critical insights:
 
 This section provides interactive visualizations of the power outage data, allowing for a deeper exploration of the patterns and trends discussed in the analysis.
 
-### Geospatial Variable Analysis: Outage Hotspots
-To understand the geographic distribution of power outages, we analyzed the frequency of incidents by state. This helps us answer: *Where do power outages occur most frequently?*
 
-<iframe src="{{ site.baseurl }}/folium_outage_gridmap.html" width="100%" height="500px" frameborder="0"></iframe>
-
-**Analysis:** This interactive map displays the concentration of power outages across the United States. Each region is color-coded based on the total number of outage events. The visualization clearly indicates that certain states, particularly those in the Midwest and on the East Coast, experience a higher frequency of power disruptions. This suggests that geographic factors, such as climate patterns and population density, play a significant role.
 
 ### Bivariate Analysis: Weather's Impact on Outages
 Next, we investigated the relationship between environmental factors and power outages. This analysis addresses the question: *How do weather events correlate with power disruptions?*
@@ -184,12 +179,7 @@ Understanding which types of incidents lead to the longest outages is crucial fo
 
 **Analysis:** This bar chart compares the average outage duration for different causes. It reveals that events like severe weather lead to significantly longer restoration times compared to equipment failure. This insight can help utility companies prioritize and allocate resources more effectively during different types of crises.
 
-### Impact Analysis: Customers Affected vs. Duration
-This scatter plot explores the relationship between the number of customers affected and the duration of the outage.
 
-<iframe src="{{ site.baseurl }}/customers_vs_duration.html" width="100%" height="500px" frameborder="0"></iframe>
-
-**Analysis:** By plotting the number of customers affected against outage duration, we can identify large-scale, high-impact events. The use of a log scale reveals that while most outages are relatively small and short, a number of significant events affect a large number of customers for extended periods. These are the critical events our model aims to predict.
 
 ### Regional Analysis: Outages by Climate Zone
 This treemap provides a proportional view of outage distribution across different climate regions.
@@ -218,24 +208,60 @@ We're building a **predictive model** (not inferential) because our goal is to f
 - Geographic and infrastructure characteristics
 - Seasonal and temporal features
 
-<div class="feature-list">
-<div class="feature-item">
-<h4>Weather Features</h4>
-Temperature, precipitation, wind speed, humidity
-</div>
-<div class="feature-item">
-<h4>Geographic Features</h4>
-State, region, population density
-</div>
-<div class="feature-item">
-<h4>Temporal Features</h4>
-Time of year, day of week, historical patterns
-</div>
-<div class="feature-item">
-<h4>Infrastructure Features</h4>
-Age of power infrastructure, maintenance records
-</div>
-</div>
+### Variables Used in the Model
+
+Our analysis utilizes a comprehensive set of variables from the power outage dataset. Below is a detailed breakdown of all variables considered in our model:
+
+| Variable Name | Description | Data Type | Role in Model | Source |
+|---------------|-------------|-----------|---------------|---------|
+| **Response Variable** |
+| `CAUSE.CATEGORY` | High-level cause of power outage (e.g., severe weather, equipment failure) | Categorical | Target Variable | DOE Database |
+| **Temporal Features** |
+| `YEAR` | Year of the outage event | Integer | Predictor | DOE Database |
+| `MONTH` | Month of the outage event (1-12) | Integer | Predictor | DOE Database |
+| `OUTAGE.START` | Start date and time of outage | DateTime | Predictor | DOE Database |
+| `OUTAGE.RESTORATION` | Restoration date and time | DateTime | Predictor | DOE Database |
+| `DURATION_HOURS` | Duration of outage in hours | Float | Predictor | Calculated |
+| **Geographic Features** |
+| `U.S._STATE` | State where outage occurred | Categorical | Predictor | DOE Database |
+| `CLIMATE.REGION` | Climate region classification | Categorical | Predictor | DOE Database |
+| `LAT` | Latitude coordinate of state center | Float | Predictor | Calculated |
+| `LON` | Longitude coordinate of state center | Float | Predictor | Calculated |
+| **Weather & Climate Features** |
+| `ANOMALY.LEVEL` | Temperature anomaly level | Float | Predictor | Climate Data |
+| `CLIMATE.CATEGORY` | Climate category (normal, warm, cold) | Categorical | Predictor | Climate Data |
+| **Impact & Severity Features** |
+| `CUSTOMERS.AFFECTED` | Number of customers affected by outage | Integer | Predictor | DOE Database |
+| **Demographic & Land Use Features** |
+| `POPDEN_URBAN` | Urban population density | Float | Predictor | Census Data |
+| `POPDEN_RURAL` | Rural population density | Float | Predictor | Census Data |
+| `AREAPCT_URBAN` | Percentage of urban area | Float | Predictor | Census Data |
+| `AREAPCT_UC` | Percentage of urban cluster area | Float | Predictor | Census Data |
+| `PCT_LAND` | Percentage of land area | Float | Predictor | Census Data |
+| `PCT_WATER_TOT` | Total percentage of water area | Float | Predictor | Census Data |
+| `PCT_WATER_INLAND` | Percentage of inland water area | Float | Predictor | Census Data |
+
+#### Variable Categories and Their Importance:
+
+**Primary Predictors:**
+- **Weather Variables**: `ANOMALY.LEVEL`, `CLIMATE.CATEGORY` - These are crucial as weather is a major cause of outages
+- **Geographic Variables**: `U.S._STATE`, `CLIMATE.REGION` - Capture regional vulnerability patterns
+- **Temporal Variables**: `YEAR`, `MONTH` - Capture seasonal and long-term trends
+
+**Secondary Predictors:**
+- **Demographic Variables**: Population density and land use characteristics that may indicate infrastructure stress
+- **Impact Variables**: `CUSTOMERS.AFFECTED` - May indicate system vulnerability patterns
+
+**Feature Engineering:**
+- **`DURATION_HOURS`**: Calculated from start and restoration times to capture outage severity
+- **`LAT`/`LON`**: Geographic coordinates for spatial analysis and mapping
+- **Seasonal Features**: Derived from `MONTH` to capture seasonal patterns
+
+#### Data Quality Considerations:
+- All variables underwent data cleaning and validation
+- Missing values were handled appropriately for each variable type
+- Categorical variables were encoded using one-hot encoding
+- Numerical variables were scaled for model training
 
 </div>
 
@@ -420,11 +446,3 @@ This project demonstrates the potential of machine learning in predicting power 
 - Scalable machine learning pipeline for large datasets
 - Interactive tools for stakeholder engagement
 
-</div>
-
-<div class="project-links">
-**View the complete analysis**: [Jupyter Notebook](/project/project.ipynb)  
-**Interactive Maps**: [Outage Map](outages_map.html)
-</div>
-
-</div>
