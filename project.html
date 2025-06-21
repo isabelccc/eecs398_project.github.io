@@ -7509,12 +7509,24 @@ a.anchor-link {
 </style>
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<main>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="%22Understanding-and-Predicting-Power-Outage-Patterns-in-the-United-States%22">"Understanding and Predicting Power Outage Patterns in the United States"<a class="anchor-link" href="#%22Understanding-and-Predicting-Power-Outage-Patterns-in-the-United-States%22">¶</a></h1><p><strong>Name(s)</strong>: xiulin chen</p>
+<p><strong>Website Link</strong>: <a href="https://isabelccc.github.io/eecs398_project.github.io/">https://isabelccc.github.io/eecs398_project.github.io/</a></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [63]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -7523,8 +7535,8 @@ a.anchor-link {
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 
-<span class="n">df</span><span class="p">[</span><span class="s1">'U.S._STATE'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-<span class="n">df_valid</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"U.S._STATE"</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Rows:"</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Columns:"</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -7553,17 +7565,8 @@ a.anchor-link {
        'AREAPCT_URBAN', 'AREAPCT_UC', 'PCT_LAND', 'PCT_WATER_TOT',
        'PCT_WATER_INLAND'],
       dtype='object')
-      OUTAGE.START.DATE OUTAGE.START.TIME
-1   2011-07-01 00:00:00          17:00:00
-2   2014-05-11 00:00:00          18:38:00
-3   2010-10-26 00:00:00          20:00:00
-4   2012-06-19 00:00:00          04:30:00
-5   2015-07-18 00:00:00          02:00:00
-6   2010-11-13 00:00:00          15:00:00
-7   2010-07-17 00:00:00          20:30:00
-8   2005-06-08 00:00:00          04:00:00
-9   2015-03-16 00:00:00          07:31:00
-10  2013-06-21 00:00:00          17:39:00
+Rows: 1535
+Columns: ['variables', 'OBS', 'YEAR', 'MONTH', 'U.S._STATE', 'POSTAL.CODE', 'NERC.REGION', 'CLIMATE.REGION', 'ANOMALY.LEVEL', 'CLIMATE.CATEGORY', 'OUTAGE.START.DATE', 'OUTAGE.START.TIME', 'OUTAGE.RESTORATION.DATE', 'OUTAGE.RESTORATION.TIME', 'CAUSE.CATEGORY', 'CAUSE.CATEGORY.DETAIL', 'HURRICANE.NAMES', 'OUTAGE.DURATION', 'DEMAND.LOSS.MW', 'CUSTOMERS.AFFECTED', 'RES.PRICE', 'COM.PRICE', 'IND.PRICE', 'TOTAL.PRICE', 'RES.SALES', 'COM.SALES', 'IND.SALES', 'TOTAL.SALES', 'RES.PERCEN', 'COM.PERCEN', 'IND.PERCEN', 'RES.CUSTOMERS', 'COM.CUSTOMERS', 'IND.CUSTOMERS', 'TOTAL.CUSTOMERS', 'RES.CUST.PCT', 'COM.CUST.PCT', 'IND.CUST.PCT', 'PC.REALGSP.STATE', 'PC.REALGSP.USA', 'PC.REALGSP.REL', 'PC.REALGSP.CHANGE', 'UTIL.REALGSP', 'TOTAL.REALGSP', 'UTIL.CONTRI', 'PI.UTIL.OFUSA', 'POPULATION', 'POPPCT_URBAN', 'POPPCT_UC', 'POPDEN_URBAN', 'POPDEN_UC', 'POPDEN_RURAL', 'AREAPCT_URBAN', 'AREAPCT_UC', 'PCT_LAND', 'PCT_WATER_TOT', 'PCT_WATER_INLAND']
 </pre>
 </div>
 </div>
@@ -7577,6 +7580,15 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Step-1:Introduction-and-Question-Identification">Step 1:Introduction and Question Identification<a class="anchor-link" href="#Step-1:Introduction-and-Question-Identification">¶</a></h2><p>Our project leverages a comprehensive dataset detailing major power outage events across the United States, spanning from the year 2000 to 2016. Each row in the dataset represents a single outage incident, enriched with contextual features such as climate conditions, regional infrastructure metrics, population data, and outage metadata. The dataset originates from U.S. government and energy infrastructure reports.</p>
+<p>Total Rows: ~1535</p>
+<pre><code>•	Key columns for analysis:
+•	YEAR, MONTH: When the outage happened
+•	U.S._STATE, CLIMATE.REGION: Where it occurred
+•	CLIMATE.CATEGORY, ANOMALY.LEVEL: Climate conditions
+•	CUSTOMERS.AFFECTED: Impact
+•	OUTAGE.START, OUTAGE.RESTORATION: Timing
+•	CAUSE.CATEGORY: What caused the outage
+</code></pre>
 </div>
 </div>
 </div>
@@ -7587,8 +7599,6 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>question:
-What are the characteristics of major power outages with higher severity? Variables to consider include location, time, climate, land-use characteristics, electricity consumption patterns, economic characteristics, etc. What risk factors may an energy company want to look into when predicting the location and severity of its next major power outage?</p>
 <h2 id="Step-2:-Data-Cleaning-and-Exploratory-Data-Analysis">Step 2: Data Cleaning and Exploratory Data Analysis<a class="anchor-link" href="#Step-2:-Data-Cleaning-and-Exploratory-Data-Analysis">¶</a></h2>
 </div>
 </div>
@@ -7598,10 +7608,13 @@ What are the characteristics of major power outages with higher severity? Variab
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [40]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [61]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Make a copy to avoid SettingWithCopyWarning</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'U.S._STATE'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">df_valid</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"U.S._STATE"</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+
+<span class="c1"># Make a copy to avoid SettingWithCopyWarning</span>
 <span class="n">df_valid</span> <span class="o">=</span> <span class="n">df_valid</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Convert date and time columns to string explicitly</span>
@@ -7628,8 +7641,21 @@ What are the characteristics of major power outages with higher severity? Variab
 <span class="c1"># Drop invalid rows</span>
 <span class="n">df_valid</span> <span class="o">=</span> <span class="n">df_valid</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"OUTAGE.START"</span><span class="p">,</span> <span class="s2">"OUTAGE.RESTORATION"</span><span class="p">,</span> <span class="s2">"DURATION_HOURS"</span><span class="p">])</span>
 
+<span class="c1"># Ensure numeric columns are cast correctly:</span>
+<span class="n">df_valid</span><span class="p">[</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_valid</span><span class="p">[</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
+<span class="n">df_valid</span><span class="p">[</span><span class="s2">"ANOMALY.LEVEL"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_valid</span><span class="p">[</span><span class="s2">"ANOMALY.LEVEL"</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
+
+
+<span class="c1"># Remove duration and customer outliers</span>
+<span class="n">duration_threshold</span> <span class="o">=</span> <span class="n">df_valid</span><span class="p">[</span><span class="s2">"DURATION_HOURS"</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.999</span><span class="p">)</span>
+<span class="n">df_valid</span> <span class="o">=</span> <span class="n">df_valid</span><span class="p">[</span>
+    <span class="p">(</span><span class="n">df_valid</span><span class="p">[</span><span class="s2">"DURATION_HOURS"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">duration_threshold</span><span class="p">)</span> <span class="o">&amp;</span>
+    <span class="p">(</span><span class="n">df_valid</span><span class="p">[</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">1e7</span><span class="p">)</span>
+<span class="p">]</span>
+
 <span class="c1"># Show result</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_valid</span><span class="p">[[</span><span class="s2">"U.S._STATE"</span><span class="p">,</span> <span class="s2">"OUTAGE.START"</span><span class="p">,</span> <span class="s2">"OUTAGE.RESTORATION"</span><span class="p">,</span> <span class="s2">"DURATION_HOURS"</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">df_valid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -7643,12 +7669,18 @@ What are the characteristics of major power outages with higher severity? Variab
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>  U.S._STATE        OUTAGE.START  OUTAGE.RESTORATION  DURATION_HOURS
-1  Minnesota 2011-07-01 17:00:00 2011-07-03 20:00:00       51.000000
-2  Minnesota 2014-05-11 18:38:00 2014-05-11 18:39:00        0.016667
-3  Minnesota 2010-10-26 20:00:00 2010-10-28 22:00:00       50.000000
-4  Minnesota 2012-06-19 04:30:00 2012-06-20 23:00:00       42.500000
-5  Minnesota 2015-07-18 02:00:00 2015-07-19 07:00:00       29.000000
+1  Minnesota 2011-07-01 17:00:00 2011-07-03 20:00:00            51.0
+3  Minnesota 2010-10-26 20:00:00 2010-10-28 22:00:00            50.0
+4  Minnesota 2012-06-19 04:30:00 2012-06-20 23:00:00            42.5
+5  Minnesota 2015-07-18 02:00:00 2015-07-19 07:00:00            29.0
+6  Minnesota 2010-11-13 15:00:00 2010-11-14 22:00:00            31.0
 </pre>
+</div>
+</div>
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[61]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>1056</pre>
 </div>
 </div>
 </div>
@@ -7658,7 +7690,7 @@ What are the characteristics of major power outages with higher severity? Variab
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [41]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [62]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">relevant_columns</span> <span class="o">=</span> <span class="p">[</span>
@@ -7680,7 +7712,7 @@ What are the characteristics of major power outages with higher severity? Variab
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[41]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[62]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7738,27 +7770,7 @@ What are the characteristics of major power outages with higher severity? Variab
 <td>5.478743</td>
 <td>2011-07-01 17:00:00</td>
 <td>2011-07-03 20:00:00</td>
-<td>51.000000</td>
-</tr>
-<tr>
-<th>2</th>
-<td>2014.0</td>
-<td>5.0</td>
-<td>Minnesota</td>
-<td>East North Central</td>
-<td>-0.1</td>
-<td>normal</td>
-<td>NaN</td>
-<td>2279</td>
-<td>18.2</td>
-<td>2.14</td>
-<td>0.6</td>
-<td>91.592666</td>
-<td>8.407334</td>
-<td>5.478743</td>
-<td>2014-05-11 18:38:00</td>
-<td>2014-05-11 18:39:00</td>
-<td>0.016667</td>
+<td>51.0</td>
 </tr>
 <tr>
 <th>3</th>
@@ -7778,7 +7790,7 @@ What are the characteristics of major power outages with higher severity? Variab
 <td>5.478743</td>
 <td>2010-10-26 20:00:00</td>
 <td>2010-10-28 22:00:00</td>
-<td>50.000000</td>
+<td>50.0</td>
 </tr>
 <tr>
 <th>4</th>
@@ -7798,7 +7810,7 @@ What are the characteristics of major power outages with higher severity? Variab
 <td>5.478743</td>
 <td>2012-06-19 04:30:00</td>
 <td>2012-06-20 23:00:00</td>
-<td>42.500000</td>
+<td>42.5</td>
 </tr>
 <tr>
 <th>5</th>
@@ -7818,12 +7830,68 @@ What are the characteristics of major power outages with higher severity? Variab
 <td>5.478743</td>
 <td>2015-07-18 02:00:00</td>
 <td>2015-07-19 07:00:00</td>
-<td>29.000000</td>
+<td>29.0</td>
+</tr>
+<tr>
+<th>6</th>
+<td>2010.0</td>
+<td>11.0</td>
+<td>Minnesota</td>
+<td>East North Central</td>
+<td>-1.4</td>
+<td>cold</td>
+<td>60000.0</td>
+<td>2279</td>
+<td>18.2</td>
+<td>2.14</td>
+<td>0.6</td>
+<td>91.592666</td>
+<td>8.407334</td>
+<td>5.478743</td>
+<td>2010-11-13 15:00:00</td>
+<td>2010-11-14 22:00:00</td>
+<td>31.0</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [55]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.figure_factory</span> <span class="k">as</span> <span class="nn">ff</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">df_valid</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"DURATION_HOURS"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Outage Duration Distribution (Box Plot)"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">"univariate_duration_box.html"</span><span class="p">)</span>
+
+<span class="c1"># Histogram of CUSTOMERS.AFFECTED</span>
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df_valid</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Distribution of Customers Affected"</span><span class="p">)</span>
+<span class="n">fig2</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="s2">"univariate_customers.html"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><em>Univarite analysis :duration hours</em></p>
+<p>This box plot illustrates the distribution of outage durations in hours. The median outage duration is approximately 21 hours, with most outages lasting under 60 hours. However, there are several extreme events exceeding 140 hours, which are visualized as outliers. These long outages may be due to severe weather or infrastructure failures and are rare but impactful. This insight supports our focus on duration as a key indicator of severity.</p>
+<p><em>Univariate Analysis: Customers Affected (Histogram)</em></p>
+<p>This histogram displays the distribution of the number of customers affected by each outage. The distribution is highly right-skewed — most outages affect fewer than 250,000 customers, while a few extreme cases impact over 1 million. These rare but massive events are important for understanding system vulnerability and planning mitigation efforts. The presence of such a long tail highlights the need for careful handling of this variable during model training, potentially via transformation or robust scaling.</p>
 </div>
 </div>
 </div>
@@ -8051,16 +8119,15 @@ Saved to project/outages_by_region.html
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">folium</span>
 
-<span class="c1"># 创建地图</span>
+
 <span class="nb">map</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">37.8</span><span class="p">,</span> <span class="o">-</span><span class="mi">96</span><span class="p">],</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
-<span class="c1"># 遍历数据，按州中心画圆点，大小与受影响人数成比例</span>
+
 <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"U.S._STATE"</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
     <span class="n">state</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">"U.S._STATE"</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">state_coords</span><span class="p">:</span>
         <span class="n">affected</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">]</span>
         
-        <span class="c1"># 控制大小，使用对数放缩，防止极值过大</span>
         <span class="n">radius</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">affected</span><span class="o">**</span><span class="mf">0.3</span> <span class="o">/</span> <span class="mi">3</span><span class="p">))</span> 
         <span class="n">color</span> <span class="o">=</span> <span class="s1">'red'</span> <span class="k">if</span> <span class="n">affected</span> <span class="o">&gt;</span> <span class="mi">500_000</span> <span class="k">else</span> <span class="s1">'orange'</span> <span class="k">if</span> <span class="n">affected</span> <span class="o">&gt;</span> <span class="mi">100_000</span> <span class="k">else</span> <span class="s1">'green'</span>
         
@@ -8073,7 +8140,7 @@ Saved to project/outages_by_region.html
             <span class="n">popup</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">state</span><span class="si">}</span><span class="s2">&lt;br&gt;Cause: </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'CAUSE.CATEGORY'</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;br&gt;Affected: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">affected</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span>
 
-<span class="c1"># 保存 HTML</span>
+
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"outages_map.html"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">map</span><span class="o">.</span><span class="n">_repr_html_</span><span class="p">())</span>
 </pre></div>
@@ -8090,9 +8157,12 @@ Saved to project/outages_by_region.html
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Step-3:-Framing-a-Prediction-Problem">Step 3: Framing a Prediction Problem<a class="anchor-link" href="#Step-3:-Framing-a-Prediction-Problem">¶</a></h2><p>Predict the cause of a major power outage.</p>
 <p>In this project, we aim to predict the cause of a major power outage in the United States using relevant environmental, regional, and temporal data available at the time of the outage. The goal is to assist utility companies and policy-makers in proactively identifying risk factors and preparing mitigation strategies.
-    •	Problem Type: This is a multiclass classification task, as the target variable contains more than two distinct categories.
-    •	Response Variable: CAUSE.CATEGORY — this column represents the high-level cause of the power outage (e.g., intentional attack, equipment failure, public appeal, etc.). We chose this variable because understanding the cause of an outage has practical value for prevention and planning.
-    •	Evaluation Metric: We use the macro-averaged F1-score to evaluate model performance. This metric is more appropriate than accuracy because our dataset is imbalanced, with some cause categories appearing much less frequently than others. Macro F1 equally weights each class, ensuring that rare but important categories are not ignored.</p>
+<br/>
+<br/>
+<br/>
+•	Problem Type: This is a multiclass classification task, as the target variable contains more than two distinct categories.
+•	Response Variable: CAUSE.CATEGORY — this column represents the high-level cause of the power outage (e.g., intentional attack, equipment failure, public appeal, etc.). We chose this variable because understanding the cause of an outage has practical value for prevention and planning.
+•	Evaluation Metric: We use the macro-averaged F1-score to evaluate model performance. This metric is more appropriate than accuracy because our dataset is imbalanced, with some cause categories appearing much less frequently than others. Macro F1 equally weights each class, ensuring that rare but important categories are not ignored.</p>
 </div>
 </div>
 </div>
@@ -8112,53 +8182,60 @@ Saved to project/outages_by_region.html
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [67]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
-<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">f1_score</span>
 
-<span class="c1"># === Load your cleaned DataFrame ===</span>
-<span class="c1"># For example, assuming you already have a cleaned df named `df_clean`</span>
-<span class="c1"># df_clean = pd.read_csv("your_cleaned_file.csv")  # Or use your existing df</span>
-
-<span class="c1"># === Filter relevant columns for the baseline model ===</span>
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'U.S._STATE'</span><span class="p">,</span> <span class="s1">'MONTH'</span><span class="p">]</span>
+<span class="c1"># Step 1: Select relevant columns</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">'YEAR'</span><span class="p">,</span> <span class="s1">'MONTH'</span><span class="p">,</span> <span class="s1">'U.S._STATE'</span><span class="p">,</span> <span class="s1">'CLIMATE.REGION'</span><span class="p">,</span>
+    <span class="s1">'ANOMALY.LEVEL'</span><span class="p">,</span> <span class="s1">'CLIMATE.CATEGORY'</span><span class="p">,</span>
+    <span class="s1">'CUSTOMERS.AFFECTED'</span><span class="p">,</span> <span class="s1">'DURATION_HOURS'</span>
+<span class="p">]</span>
 <span class="n">target</span> <span class="o">=</span> <span class="s1">'CAUSE.CATEGORY'</span>
 
-<span class="c1"># Drop rows with missing target or feature values</span>
-<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df_valid</span><span class="p">[</span><span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="n">target</span><span class="p">]]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="c1"># Drop rows with missing target</span>
+<span class="n">df_model</span> <span class="o">=</span> <span class="n">df_valid</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">target</span><span class="p">])[</span><span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="n">target</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
+<span class="c1"># Step 2: Split data</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_model</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_model</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
 
-<span class="n">X</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># Step 3: Define preprocessing</span>
+<span class="n">categorical_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'U.S._STATE'</span><span class="p">,</span> <span class="s1">'CLIMATE.REGION'</span><span class="p">,</span> <span class="s1">'CLIMATE.CATEGORY'</span><span class="p">]</span>
+<span class="n">numerical_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'YEAR'</span><span class="p">,</span> <span class="s1">'MONTH'</span><span class="p">,</span> <span class="s1">'ANOMALY.LEVEL'</span><span class="p">,</span> <span class="s1">'CUSTOMERS.AFFECTED'</span><span class="p">,</span> <span class="s1">'DURATION_HOURS'</span><span class="p">]</span>
 
 <span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
     <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">(</span><span class="s1">'cat'</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">'ignore'</span><span class="p">),</span> <span class="p">[</span><span class="s1">'U.S._STATE'</span><span class="p">]),</span>
-        <span class="p">(</span><span class="s1">'num'</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="p">[</span><span class="s1">'MONTH'</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">'num'</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">numerical_features</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">'cat'</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">'ignore'</span><span class="p">),</span> <span class="n">categorical_features</span><span class="p">)</span>
     <span class="p">]</span>
 <span class="p">)</span>
 
-<span class="c1"># === Build pipeline ===</span>
-<span class="n">baseline_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
+<span class="c1"># Step 4: Build pipeline</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="p">[</span>
     <span class="p">(</span><span class="s1">'preprocessor'</span><span class="p">,</span> <span class="n">preprocessor</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'classifier'</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+    <span class="p">(</span><span class="s1">'classifier'</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">'lbfgs'</span><span class="p">))</span>
 <span class="p">])</span>
 
-<span class="c1"># === Train model ===</span>
-<span class="n">baseline_pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="c1"># Step 5: Train</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="c1"># === Predict and evaluate ===</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">baseline_pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Classification Report for Baseline Model:"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="c1"># Step 6: Evaluate</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">macro_f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">'macro'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Macro F1-score (Baseline):"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">macro_f1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Classification Report:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -8171,38 +8248,22 @@ Saved to project/outages_by_region.html
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Classification Report for Baseline Model:
-                               precision    recall  f1-score   support
+<pre>Macro F1-score (Baseline): 0.373
 
-            equipment failure       0.00      0.00      0.00        10
-        fuel supply emergency       0.00      0.00      0.00         8
-           intentional attack       0.63      0.54      0.58        81
-                    islanding       0.00      0.00      0.00         8
-                public appeal       0.00      0.00      0.00        11
-               severe weather       0.59      0.88      0.70       149
-system operability disruption       0.33      0.03      0.06        29
+Classification Report:
+                                precision    recall  f1-score   support
 
-                     accuracy                           0.59       296
-                    macro avg       0.22      0.21      0.19       296
-                 weighted avg       0.50      0.59      0.52       296
+            equipment failure       0.00      0.00      0.00         5
+        fuel supply emergency       0.00      0.00      0.00         1
+           intentional attack       0.82      0.85      0.84        39
+                    islanding       0.60      0.43      0.50         7
+                public appeal       0.00      0.00      0.00         4
+               severe weather       0.87      0.94      0.90       140
+system operability disruption       0.38      0.38      0.38        16
 
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/Users/linl/miniforge3/envs/pds/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning:
-
-Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-
-/Users/linl/miniforge3/envs/pds/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning:
-
-Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-
-/Users/linl/miniforge3/envs/pds/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning:
-
-Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+                     accuracy                           0.82       212
+                    macro avg       0.38      0.37      0.37       212
+                 weighted avg       0.77      0.82      0.79       212
 
 </pre>
 </div>
@@ -8225,7 +8286,7 @@ Precision is ill-defined and being set to 0.0 in labels with no predicted sample
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [65]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -8237,19 +8298,18 @@ Precision is ill-defined and being set to 0.0 in labels with no predicted sample
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">FunctionTransformer</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
 
-<span class="c1"># === Clean and filter ===</span>
+
 <span class="n">df_valid</span><span class="p">[</span><span class="s2">"YEAR"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_valid</span><span class="p">[</span><span class="s2">"YEAR"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 <span class="n">df_valid</span><span class="p">[</span><span class="s2">"MONTH"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_valid</span><span class="p">[</span><span class="s2">"MONTH"</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
 <span class="n">df_valid</span><span class="p">[</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_valid</span><span class="p">[</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
 <span class="n">df_valid</span><span class="p">[</span><span class="s2">"ANOMALY.LEVEL"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_valid</span><span class="p">[</span><span class="s2">"ANOMALY.LEVEL"</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
 
-<span class="c1"># Drop rows with missing or invalid values for key columns</span>
+
 <span class="n">required_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"YEAR"</span><span class="p">,</span> <span class="s2">"MONTH"</span><span class="p">,</span> <span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">,</span> <span class="s2">"ANOMALY.LEVEL"</span><span class="p">,</span> <span class="s2">"CAUSE.CATEGORY"</span><span class="p">]</span>
 <span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_valid</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="n">required_cols</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"CUSTOMERS.AFFECTED"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="n">df_clean</span><span class="p">[</span><span class="s2">"ANOMALY.LEVEL"</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
 
-<span class="c1"># === Feature Engineering Functions ===</span>
 <span class="k">def</span> <span class="nf">extract_season</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
     <span class="n">month</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="s2">"MONTH"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
@@ -8300,8 +8360,8 @@ Precision is ill-defined and being set to 0.0 in labels with no predicted sample
 
 <span class="c1"># === Evaluation ===</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"✅ Best Parameters:"</span><span class="p">,</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"📊 Final Model Report:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Best Parameters:"</span><span class="p">,</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Classification Report:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -8314,8 +8374,9 @@ Precision is ill-defined and being set to 0.0 in labels with no predicted sample
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>✅ Best Parameters: {'classifier__max_depth': 15, 'classifier__min_samples_split': 2, 'classifier__n_estimators': 50}
-📊 Final Model Report:
+<pre>Best Parameters: {'classifier__max_depth': 15, 'classifier__min_samples_split': 2, 'classifier__n_estimators': 50}
+
+Classification Report:
                                 precision    recall  f1-score   support
 
             equipment failure       0.00      0.00      0.00         5
@@ -8331,38 +8392,6 @@ system operability disruption       0.40      0.25      0.31        16
                  weighted avg       0.80      0.86      0.83       212
 
 </pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/Users/linl/miniforge3/envs/pds/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning:
-
-Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-
-/Users/linl/miniforge3/envs/pds/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning:
-
-Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-
-/Users/linl/miniforge3/envs/pds/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning:
-
-Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
 </div>
 </div>
 </div>

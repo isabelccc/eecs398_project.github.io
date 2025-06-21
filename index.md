@@ -153,6 +153,19 @@ This interactive map visualizes the geographic distribution and severity of powe
 The coastal regions—particularly the Southeast (e.g., Florida, North Carolina), Gulf Coast (e.g., Texas, Louisiana), and the West Coast (e.g., California)—show a higher concentration of severe outages. These areas are more prone to hurricanes, wildfires, and heavy storms, aligning with known climate vulnerabilities. In contrast, many inland regions experience fewer or less severe outages, indicated by smaller green and orange markers. This spatial pattern highlights the importance of incorporating regional climate risk into outage prediction models and utility infrastructure planning.
 </p>
 
+ <h2>Interesting Aggregates</h2>
+
+  <h3>Average Outage Duration by Region and Climate Category</h3>
+  <p>This pivot table helps us understand how outage durations vary based on regional and climate characteristics.</p>
+
+  {{ pivot_table_html | safe }}
+
+  <p>
+    This pivot table reveals patterns in outage duration across regions and climate types. 
+    For example, many regions experience significantly longer outages during <strong>warm</strong> or <strong>cold</strong> climate categories. 
+    Such insights can guide utilities in climate-specific planning and suggest that extreme temperatures may stress infrastructure more than average conditions.
+  </p>
+
 
   <h2>Further Visual Analysis</h2>
 
