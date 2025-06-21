@@ -184,10 +184,7 @@ The coastal regions—particularly the Southeast (e.g., Florida, North Carolina)
   <iframe src="{{ site.baseurl }}/outages_by_region.html" width="100%" height="500px" frameborder="0"></iframe>
 
   <p><strong>Analysis:</strong>
-    This visualization breaks down the total number of outages by climate region. It provides a complementary perspective to the state-level map,
-    revealing that certain climate zones—particularly the Southeast and Northeast—experience a higher frequency of power disruptions.
-    These regions are more exposed to extreme weather events like hurricanes and winter storms. The finding emphasizes that regional climate
-    characteristics are critical predictors of outage risk, making them essential components in building robust predictive models.
+    This treemap shows the proportion of major U.S. power outages across different climate regions. Larger boxes indicate a higher number of recorded outages in that region. The Northeast, West, and Central zones exhibit the largest shares, highlighting their relative vulnerability to power disruptions, likely due to population density, infrastructure, and exposure to extreme weather.
   </p>
 </div>
 
@@ -378,43 +375,19 @@ The coastal regions—particularly the Southeast (e.g., Florida, North Carolina)
   </p>
 </div>
 <div class="conclusion-section">
-  <h2>Conclusion and Future Work</h2>
-
-  <h3>Project Impact</h3>
+ <h3>Performance Summary</h3>
   <p>
-    This project demonstrates how machine learning can be effectively applied to predict the causes of major power outages in the United States.
-    By analyzing historical outage data alongside geographic and climatic variables, we provide data-driven tools to support:
+    We compared two models to predict the cause of power outages:
   </p>
   <ul>
-    <li><strong>Utility Companies</strong>: Enhancing outage preparedness, improving infrastructure maintenance, and optimizing resource allocation.</li>
-    <li><strong>Emergency Responders</strong>: Facilitating proactive deployment planning and disaster response strategies.</li>
-    <li><strong>Policy Makers</strong>: Supporting data-informed investments in regional grid resilience and environmental risk mitigation.</li>
+    <li><strong>Baseline Model:</strong> Logistic Regression</li>
+    <li><strong>Final Model:</strong> Random Forest Classifier</li>
   </ul>
-
-  <h3>Key Achievements</h3>
+   <h3>Key Takeaways</h3>
   <ul>
-    <li>Built a robust machine learning pipeline capable of classifying outage causes based on regional, temporal, and environmental data.</li>
-    <li>Engineered meaningful features such as outage duration and seasonal indicators, improving model performance and interpretability.</li>
-    <li>Achieved a strong benchmark with a Random Forest classifier, reaching 86% accuracy and a macro F1-score of 0.40.</li>
-    <li>Created a suite of interactive visualizations to communicate findings to stakeholders and domain experts.</li>
+    <li>The Random Forest model improved classification accuracy by 6 percentage points over the baseline.</li>
+    <li>Macro F1-score improved by 0.05, showing better balance across all cause categories—including rare ones.</li>
+    <li>This performance gain reflects the benefits of using engineered features (like season) and non-linear modeling.</li>
   </ul>
-
-  <h3>Future Enhancements</h3>
-  <ul>
-    <li><strong>Real-time Integration:</strong> Connect the model with live weather feeds and energy infrastructure APIs for up-to-date predictions.</li>
-    <li><strong>Geographic Expansion:</strong> Extend the model to include international outage datasets for global utility insights.</li>
-    <li><strong>Advanced Features:</strong> Incorporate satellite imagery, social media signals, and vegetation indices to capture additional risk factors.</li>
-    <li><strong>Model Deployment:</strong> Develop a user-facing web application that offers localized outage cause prediction based on incoming conditions.</li>
-  </ul>
-
-  <h3>Technical Contributions</h3>
-  <ul>
-    <li>Implemented a full-stack machine learning workflow using Scikit-learn pipelines and GridSearchCV for reproducible experimentation.</li>
-    <li>Developed interpretable, data-driven insights through feature engineering and model diagnostics.</li>
-    <li>Integrated interactive Plotly visualizations and custom HTML outputs to engage diverse audiences.</li>
-  </ul>
-
-  <p>
-    Overall, our work showcases the value of combining public datasets, machine learning, and domain expertise to improve infrastructure planning and societal resilience.
-  </p>
+  
 </div>
