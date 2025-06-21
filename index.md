@@ -30,12 +30,6 @@ subheading: "A comprehensive analysis using machine learning to predict and unde
 <h3>Dataset Overview</h3>
 <p>Our analysis focuses on power outage data collected across the United States, examining various factors that contribute to outage occurrences including weather conditions, geographic location, infrastructure age, and historical patterns.</p>
 
-<p>
-  Our project leverages a comprehensive dataset detailing major power outage events across the United States, spanning from the year 2000 to 2016.
-  Each row in the dataset represents a single outage incident, enriched with contextual features such as climate conditions, regional infrastructure metrics, population data, and outage metadata.
-  The dataset originates from U.S. government and energy infrastructure reports.
-</p>
-
 <p><strong>Total Rows:</strong> ~1535</p>
 
 <h4>Key Columns for Analysis:</h4>
@@ -51,9 +45,6 @@ subheading: "A comprehensive analysis using machine learning to predict and unde
 <h4>Key Questions We Investigate:</h4>
 <ul>
   <li>What are the primary factors that contribute to power outages?</li>
-  <li>Can we predict the likelihood and severity of power outages based on weather and geographic data?</li>
-  <li>How do different regions of the United States compare in terms of outage frequency and patterns?</li>
-  <li>What are the characteristics of major power outages with higher severity?</li>
 </ul>
 
 <h4>Why This Matters:</h4>
