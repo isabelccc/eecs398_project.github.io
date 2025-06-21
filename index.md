@@ -153,9 +153,6 @@ The coastal regions—particularly the Southeast (e.g., Florida, North Carolina)
 </p>
 
 
-
-
-
   <h2>Further Visual Analysis</h2>
 
   <p>To deepen our understanding, we created additional visualizations focusing on different dimensions of the outage data.</p>
@@ -186,7 +183,7 @@ The coastal regions—particularly the Southeast (e.g., Florida, North Carolina)
   <p><strong>Analysis:</strong>
     This treemap shows the proportion of major U.S. power outages across different climate regions. Larger boxes indicate a higher number of recorded outages in that region. The Northeast, West, and Central zones exhibit the largest shares, highlighting their relative vulnerability to power disruptions, likely due to population density, infrastructure, and exposure to extreme weather.
   </p>
-</div>
+
 
 <div class="project-section">
 
