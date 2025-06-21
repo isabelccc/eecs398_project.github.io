@@ -158,7 +158,7 @@ The coastal regions—particularly the Southeast (e.g., Florida, North Carolina)
   <h3>Average Outage Duration by Region and Climate Category</h3>
   <p>This pivot table helps us understand how outage durations vary based on regional and climate characteristics.</p>
 
-  {{ pivot_table_html | safe }}
+<iframe src="{{ site.baseurl }}/pivot_table.html" width="100%" height="400px" frameborder="0"></iframe>
 
   <p>
     This pivot table reveals patterns in outage duration across regions and climate types. 
