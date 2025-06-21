@@ -22,6 +22,7 @@ subheading: "A comprehensive analysis using machine learning to predict and unde
   <li><strong>Course:</strong> EECS 398 - Practical Data Science (Spring 2025)</li>
 </ul>
 
+</div>
 <div class="project-section">
 
 <h2>1. Introduction and Question Identification</h2>
@@ -184,7 +185,7 @@ The coastal regions—particularly the Southeast (e.g., Florida, North Carolina)
     This treemap shows the proportion of major U.S. power outages across different climate regions. Larger boxes indicate a higher number of recorded outages in that region. The Northeast, West, and Central zones exhibit the largest shares, highlighting their relative vulnerability to power disruptions, likely due to population density, infrastructure, and exposure to extreme weather.
   </p>
 
-
+</div>
 <div class="project-section">
 
   <h2>3. Framing a Prediction Problem</h2>
